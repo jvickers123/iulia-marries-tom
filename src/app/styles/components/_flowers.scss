@@ -1,0 +1,56 @@
+@import '../utils/utils';
+
+.flowers {
+  overflow: hidden;
+
+  &--tablet-up {
+    display: none;
+  }
+
+  &__image {
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    max-width: 100vw;
+
+    &--left {
+      left: 0;
+      // @include rustle(10s);
+      // transform-origin: left bottom;
+    }
+
+    &--right {
+      right: 0;
+      // @include rustle(10s);
+      // animation-delay: 5s;
+      // transform-origin: right bottom;
+    }
+
+    &--middle {
+      display: none;
+    }
+  }
+}
+
+@include respond(tablet) {
+  .flowers {
+    &--mobile {
+      display: none;
+    }
+
+    &--tablet-up {
+      display: block;
+    }
+  }
+}
+
+@include respond(big-desk) {
+  .flowers {
+    &__image {
+      &--middle {
+        display: block;
+        right: calc(50vw - 350px);
+      }
+    }
+  }
+}

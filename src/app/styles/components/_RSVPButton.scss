@@ -1,0 +1,35 @@
+@import '../utils/utils';
+
+.RSVP-button {
+  margin-top: -5px;
+  background: none;
+  border: none;
+  display: inline-block;
+
+  &--tablet-up {
+    display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(5deg);
+  }
+
+  &:active {
+    transform: rotate(-5deg);
+  }
+}
+
+@include respond(tablet) {
+  .RSVP-button {
+    margin-top: -8px;
+
+    &--mobile {
+      display: none;
+    }
+
+    &--tablet-up {
+      display: block;
+    }
+  }
+}

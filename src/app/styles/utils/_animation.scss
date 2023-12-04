@@ -1,0 +1,29 @@
+@mixin loop-animation($duration: 10s) {
+  animation: loop-animation $duration linear infinite;
+}
+
+@mixin rustle($duration: 8s) {
+  animation: rustle $duration infinite ease-in-out;
+}
+
+@keyframes loop-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes rustle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(3deg);
+  }
+}

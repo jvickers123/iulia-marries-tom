@@ -1,0 +1,20 @@
+// MEDIA QUERY MANAGER
+@mixin respond($breakpoint) {
+  @if $breakpoint ==tablet {
+    @media only screen and (min-width: 37.5em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint ==desk {
+    @media only screen and (min-width: 50em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint ==big-desk {
+    @media only screen and (min-width: 87.5em) {
+      @content;
+    }
+  }
+}

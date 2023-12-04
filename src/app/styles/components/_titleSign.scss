@@ -1,0 +1,33 @@
+@import '../utils/utils';
+
+.titleSign {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: 0;
+    &--tablet-up {
+      display: none;
+    }
+  }
+
+  &__image {
+    max-width: 100vw;
+  }
+}
+
+@include respond(tablet) {
+  .titleSign {
+    &__title {
+      &--mobile {
+        display: none;
+      }
+
+      &--tablet-up {
+        display: flex;
+      }
+    }
+  }
+}
