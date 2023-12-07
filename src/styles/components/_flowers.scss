@@ -15,15 +15,10 @@
 
     &--left {
       left: 0;
-      // @include rustle(10s);
-      // transform-origin: left bottom;
     }
 
     &--right {
       right: 0;
-      // @include rustle(10s);
-      // animation-delay: 5s;
-      // transform-origin: right bottom;
     }
 
     &--middle {

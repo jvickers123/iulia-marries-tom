@@ -1,7 +1,5 @@
+import { transport } from '@/utilities/fonts';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Iulia Marries Tom',
@@ -15,8 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div id="overlays" />
-      <body className={inter.className}>{children}</body>
+      <body className={transport.className}>{children}</body>
     </html>
   );
 }

@@ -12,6 +12,10 @@
   &__image {
     z-index: -2;
 
+    &--sky {
+      object-fit: cover;
+    }
+
     &--cloud {
       position: absolute;
       top: 0;

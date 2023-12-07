@@ -6,8 +6,7 @@ const Background = () => {
       <Image
         src="/assets/laptop-background.jpg"
         alt=""
-        layout="fill"
-        objectFit="cover"
+        fill
         className="background__image background__image--sky"
       />
       <Image

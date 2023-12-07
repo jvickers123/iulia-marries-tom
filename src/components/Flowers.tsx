@@ -31,7 +31,7 @@ const Flowers = () => (
         src="/assets/laptop-flowers-middle.png"
         alt=""
         width={452.02}
-        height={163.146}
+        height={143.81}
       />
       <Image
         className="flowers__image flowers__image--right"

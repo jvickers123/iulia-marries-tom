@@ -1,23 +1,22 @@
-'use client'; // This is a client component
+'use client';
 
-import Background from './components/Background';
-import './styles/main.scss';
-import Flowers from './components/Flowers';
-import TitleSign from './components/TitleSign';
-import { useState } from 'react';
-import RSVPForm from './components/RSVPForm';
+import Background from '../components/Background';
+import '../styles/main.scss';
+import Flowers from '../components/Flowers';
+import TitleSign from '../components/TitleSign';
+import { ThemeProvider } from '@mui/material';
+import theme from '../utilities/theme';
 
 export default function Home() {
-  const [showRSVP, setShowRSVP] = useState(false);
-
   return (
     <>
       <Background />
       <Flowers />
-      <main className="main">
-        <TitleSign setShowRSVP={setShowRSVP} />
-      </main>
-      {showRSVP && <RSVPForm closeModal={() => setShowRSVP(false)} />}
+      <ThemeProvider theme={theme}>
+        <main className="main">
+          <TitleSign />
+        </main>
+      </ThemeProvider>
     </>
   );
 }
