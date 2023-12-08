@@ -7,10 +7,10 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { initialRSVPState } from '@/utilities/form-utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RSVPData } from '@/types/rsvp-types';
 import { sendRSVP } from '@/utilities/api-utils';
-import { findAtSignsAndChangeFont } from '@/utilities/fonts';
+import ModalContentContainer from './ModalContentContainer';
 
 const RSVPForm = ({
   closeModal,
@@ -33,8 +33,8 @@ const RSVPForm = ({
 
   return (
     <Modal onClose={closeModal} open={showRSVP}>
-      <div className="rsvp-form-container">
-        <h2 className="rsvp-form__title">Send RSVP</h2>
+      <ModalContentContainer>
+        <h2 className="rsvp-form__title modal-heading">Send RSVP</h2>
         <form className="rsvp-form" onSubmit={handleSubmit}>
           <TextField
             className="rsvp-form__input"
@@ -92,7 +92,7 @@ const RSVPForm = ({
             Send
           </Button>
         </form>
-      </div>
+      </ModalContentContainer>
     </Modal>
   );
 };

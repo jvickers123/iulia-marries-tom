@@ -1,0 +1,40 @@
+@import '../utils/colours';
+@import '../utils/utils';
+
+.modal-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  background-color: #fff;
+  padding: 4rem 1rem 2rem 1rem;
+  border-radius: 5px;
+  border: 1px solid $dark-green;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 30;
+}
+
+@include respond(tablet) {
+  .modal-content-container {
+    width: 25rem;
+    padding: 5rem 1rem;
+    left: calc(50% - 12.5rem);
+
+    &--info {
+      left: calc(50% - 20rem);
+      width: 40rem;
+    }
+  }
+}
+
+@include respond(desk) {
+  .modal-content-container {
+    &--info {
+      left: calc(50% - 25rem);
+      width: 50rem;
+    }
+  }
+}

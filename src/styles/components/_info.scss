@@ -1,0 +1,36 @@
+@import '../utils/colours';
+@import '../utils/utils';
+
+.info {
+  &__heading {
+    color: $purple;
+    margin-bottom: 2rem;
+    font-size: 2.7rem;
+    text-align: center;
+  }
+
+  &__para {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 0.7rem;
+
+    &--green {
+      color: $light-green;
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+
+    &--purple {
+      color: $purple;
+    }
+
+    &--dark-green {
+      color: $dark-green;
+    }
+
+    &--black {
+      margin-top: 2rem;
+      color: $black;
+    }
+  }
+}

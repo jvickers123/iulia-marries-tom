@@ -1,21 +1,7 @@
 @import '../utils/colours';
 @import '../utils/utils';
 
-.rsvp-form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  top: 10%;
-  left: 5%;
-  width: 90%;
-  background-color: #fff;
-  padding: 5rem 1rem;
-  border-radius: 5px;
-  border: 1px solid $dark-green;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  z-index: 30;
-
+.modal-content-container {
   .rsvp-form {
     display: flex;
     flex-direction: column;
@@ -41,12 +27,5 @@
       font-weight: 600;
       letter-spacing: 0.7px;
     }
-  }
-}
-
-@include respond(tablet) {
-  .rsvp-form-container {
-    width: 25rem;
-    left: calc(50% - 12.5rem);
   }
 }

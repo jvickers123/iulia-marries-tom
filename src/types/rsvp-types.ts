@@ -5,3 +5,8 @@ export type RSVPData = {
   people: string;
   id?: string;
 };
+
+export enum ModalVariant {
+  DEFAULT = 'default',
+  INFO = 'info',
+}

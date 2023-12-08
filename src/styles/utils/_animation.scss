@@ -3,7 +3,7 @@
 }
 
 @mixin rustle($duration: 8s) {
-  animation: rustle $duration infinite ease-in-out;
+  animation: rustle $duration infinite cubic-bezier(0.25, 0.87, 0.96, -0.11);
 }
 
 @keyframes loop-animation {

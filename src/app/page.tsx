@@ -6,6 +6,7 @@ import Flowers from '../components/Flowers';
 import TitleSign from '../components/TitleSign';
 import { ThemeProvider } from '@mui/material';
 import theme from '../utilities/theme';
+import MoreInfoSign from '@/components/MoreInfoSign';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <ThemeProvider theme={theme}>
         <main className="main">
           <TitleSign />
+          <MoreInfoSign />
         </main>
       </ThemeProvider>
     </>
