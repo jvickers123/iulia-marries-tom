@@ -1,0 +1,21 @@
+@import '../utils/colours';
+
+.success-rsvp {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__heading {
+    color: $light-green;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__paragraph {
+    color: $dark-green;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+}

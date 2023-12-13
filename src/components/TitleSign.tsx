@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import RSVPButton from './RSVPButton';
 import { useState } from 'react';
-import RSVPForm from './RSVPForm';
+import RsvpModal from './RsvpModal';
 const titleSrc = '/assets/laptop-sign.png';
 const titleAlt = 'Iulia marries Tom';
 const titleSignImageClassName = 'titleSign__image';
@@ -55,7 +55,7 @@ const TitleSign = () => {
           />
         </span>
       </div>
-      <RSVPForm closeModal={() => setShowRSVP(false)} showRSVP={showRSVP} />
+      <RsvpModal closeModal={() => setShowRSVP(false)} showRSVP={showRSVP} />
     </>
   );
 };

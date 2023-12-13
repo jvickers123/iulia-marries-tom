@@ -1,11 +1,14 @@
 @import './base';
 @import './components/background';
+@import './components/failedRsvp';
 @import './components/main';
 @import './components/modalContentContainer';
 @import './components/modalInfoSign';
 @import './components/flowers';
 @import './components/info';
+@import './components/loadingSpinner';
 @import './components/titleSign';
 @import './components/RSVPButton';
 @import './components/RSVPForm';
 @import './components/rsvpTable';
+@import './components/successRsvp';
