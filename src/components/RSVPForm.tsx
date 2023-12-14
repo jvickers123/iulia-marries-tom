@@ -8,7 +8,6 @@ import {
   Radio,
   Button,
 } from '@mui/material';
-import { useEffect } from 'react';
 
 const RsvpForm = ({
   setRSVPData,
