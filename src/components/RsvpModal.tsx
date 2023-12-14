@@ -3,7 +3,7 @@ import { initialRSVPState } from '@/utilities/form-utils';
 import { useState } from 'react';
 import { sendRSVP } from '@/utilities/api-utils';
 import ModalContentContainer from './ModalContentContainer';
-import RsvpForm from './RsvpForm';
+import RsvpForm from './RSVPFormTemporaryNameChange';
 import LoadingSpinner from './LoadingSpinner';
 import FailedRSVP from './FailedRSVP';
 import SuccessRSVP from './SuccessRSVP';
