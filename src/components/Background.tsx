@@ -10,21 +10,18 @@ const Background = () => {
         className="background__image background__image--sky"
       />
       <Image
-        src="/assets/clouds-left.png"
+        src="/assets/clouds.png"
         alt=""
-        width={7100}
-        height={1000}
+        width={7072.5}
+        height={1230}
         className="background__image background__image--cloud"
       />
       <Image
-        src="/assets/clouds-right.png"
+        src="/assets/clouds.png"
         alt=""
-        width={7100}
-        height={1000}
-        className="background__image background__image--cloud"
-        style={{
-          left: '100%',
-        }}
+        width={7072.5}
+        height={1230}
+        className="background__image background__image--cloud background__image background__image--cloud-delayed"
       />
     </div>
   );

@@ -23,5 +23,9 @@
       min-height: 100vh;
       @include loop-animation(500s);
     }
+
+    &--cloud-delayed {
+      @include loop-animation-delayed(500s);
+    }
   }
 }

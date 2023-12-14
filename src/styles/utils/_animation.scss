@@ -2,6 +2,10 @@
   animation: loop-animation $duration linear infinite;
 }
 
+@mixin loop-animation-delayed($duration: 10s) {
+  animation: loop-animation-delayed $duration linear infinite;
+}
+
 @mixin rustle($duration: 8s) {
   animation: rustle $duration infinite cubic-bezier(0.25, 0.87, 0.96, -0.11);
 }
@@ -12,6 +16,15 @@
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes loop-animation-delayed {
+  0% {
+    left: 7000px;
+  }
+  100% {
+    left: 0;
   }
 }
 

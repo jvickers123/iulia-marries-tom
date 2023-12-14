@@ -1,0 +1,27 @@
+.more-info-sign {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background: none;
+  // transform: rotate(30deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transform-origin: right bottom;
+
+  &__button-pole {
+    transform: translateX(22px);
+    z-index: -2;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(3deg);
+  }
+
+  &:active {
+    transform: rotate(-3deg);
+  }
+}
