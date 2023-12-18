@@ -10,3 +10,9 @@ export enum ModalVariant {
   DEFAULT = 'default',
   INFO = 'info',
 }
+
+export type RSVPGuest = {
+  id: string;
+  name: string;
+  fullDay?: boolean;
+};

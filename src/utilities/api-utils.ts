@@ -1,7 +1,7 @@
 import { RSVPData } from '@/types/rsvp-types';
 import axios from 'axios';
 import React, { SetStateAction } from 'react';
-import { initialRSVPState } from './form-utils';
+import { emptyGuest, initialRSVPState } from './form-utils';
 import { Guests, LoginData } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
 
@@ -10,7 +10,7 @@ export const fetchGuests = async () => {
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests`
     );
-    return data.data;
+    return data.data as Guests[];
   } catch (error) {
     console.error(error);
   }
@@ -92,10 +92,12 @@ export const editGuest = async ({
   body,
   setLoading,
   setError,
+  setShowSuccessToast,
 }: {
   body: Guests;
   setLoading: React.Dispatch<SetStateAction<boolean>>;
   setError: React.Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   setLoading(true);
   try {
@@ -103,7 +105,43 @@ export const editGuest = async ({
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${body.id}`,
       body
     );
-    console.log(data);
+    setShowSuccessToast(true);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const addGuest = async ({
+  body,
+  setLoading,
+  setError,
+  setShowSuccessToast,
+  setFormData,
+}: {
+  body: Guests;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+  setFormData: React.Dispatch<SetStateAction<Guests>>;
+}) => {
+  setLoading(true);
+  try {
+    const token = getTokenFromLocal();
+
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setShowSuccessToast(true);
+    setFormData(emptyGuest);
   } catch (error) {
     console.error(error);
     setError(true);
@@ -117,13 +155,59 @@ export const updateOrAddGuest = async ({
   data,
   setLoading,
   setError,
+  setShowSuccessToast,
+  setFormData,
 }: {
   data: Guests;
   edit?: boolean;
   setLoading: React.Dispatch<SetStateAction<boolean>>;
   setError: React.Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+  setFormData: React.Dispatch<SetStateAction<Guests>>;
 }) => {
   if (edit) {
-    editGuest({ body: data, setLoading, setError });
+    editGuest({ body: data, setLoading, setError, setShowSuccessToast });
+
+    return;
+  }
+
+  addGuest({
+    body: data,
+    setLoading,
+    setError,
+    setShowSuccessToast,
+    setFormData,
+  });
+};
+
+export const deleteGuest = async ({
+  guestId,
+  setError,
+  setLoading,
+  setShowSuccessToast,
+}: {
+  guestId: string;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const token = getTokenFromLocal();
+
+    const { data } = await axios.delete(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${guestId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setShowSuccessToast(true);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
   }
 };

@@ -6,9 +6,11 @@ import { useEffect, useState } from 'react';
 import AdminTable from '../../components/admin/AdminTable';
 import Login from '@/components/admin/Login';
 import { userAuth } from '@/utilities/auth';
+import Success from '@/components/admin/Success';
 
 const Admin = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   useEffect(() => {
     const userLoggedIn = userAuth();

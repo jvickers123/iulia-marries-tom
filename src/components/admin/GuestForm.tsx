@@ -8,15 +8,17 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, SetStateAction, useEffect, useState } from 'react';
 import { emptyGuest } from '@/utilities/form-utils';
 import LoadingSpinner from '../LoadingSpinner';
 import { updateOrAddGuest } from '@/utilities/api-utils';
+import Success from './Success';
 
 const GuestForm = ({ guest }: { guest?: Guests }) => {
   const [formData, setFormData] = useState<Guests>(emptyGuest);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
@@ -36,7 +38,14 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    updateOrAddGuest({ edit: true, data: formData, setLoading, setError });
+    updateOrAddGuest({
+      edit: guest ? true : false,
+      data: formData,
+      setLoading,
+      setError,
+      setShowSuccessToast,
+      setFormData,
+    });
   };
 
   const handleRadioChangeFullDay = (
@@ -56,8 +65,14 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
   }, [guest]);
 
   useEffect(() => {
-    console.log(formData);
-  });
+    let timeoutId: NodeJS.Timeout;
+    if (showSuccessToast) {
+      timeoutId = setTimeout(() => {
+        setShowSuccessToast(false);
+      }, 5000);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [showSuccessToast]);
 
   return (
     <>
@@ -163,6 +178,7 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
           {guest ? 'Update' : 'Add Guest'}
         </Button>
         {loading && <LoadingSpinner />}
+        {showSuccessToast && <Success />}
 
         {error && (
           <p className="login__error">Something went wrong, please try again</p>

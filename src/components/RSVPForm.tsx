@@ -1,4 +1,6 @@
-import { RSVPData } from '@/types/rsvp-types';
+import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
+import { fetchGuests } from '@/utilities/api-utils';
+import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
 import {
   TextField,
   FormControl,
@@ -8,6 +10,7 @@ import {
   Radio,
   Button,
 } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const RsvpForm = ({
   setRSVPData,
@@ -18,6 +21,8 @@ const RsvpForm = ({
   rsvpData: RSVPData;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }) => {
+  const [guests, setGuests] = useState<RSVPGuest[]>([]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     setRSVPData({ ...rsvpData, [id]: value });
@@ -27,6 +32,16 @@ const RsvpForm = ({
     const { value } = event.target;
     setRSVPData({ ...rsvpData, attending: value as 'yes' | 'no' | 'maybe' });
   };
+
+  useEffect(() => {
+    const getPeopleInfo = async () => {
+      const peopleInfo = await getPeopleInfoFromAPI();
+
+      if (!peopleInfo) return;
+      setGuests(peopleInfo);
+    };
+    getPeopleInfo();
+  }, []);
 
   return (
     <>
