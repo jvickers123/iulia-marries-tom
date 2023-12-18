@@ -1,26 +1,16 @@
 import { RSVPData } from '@/types/rsvp-types';
 import axios from 'axios';
-import { SetStateAction } from 'react';
+import React, { SetStateAction } from 'react';
 import { initialRSVPState } from './form-utils';
+import { Guests, LoginData } from '@/types/admin-types';
+import { getTokenFromLocal } from './auth';
 
-const processAxiosData = (data: any) => {
-  return Object.keys(data).map(key => {
-    return {
-      id: key,
-      ...data[key],
-    };
-  });
-};
-
-export const fetchRSVPS = async (
-  setRSVPs: React.Dispatch<SetStateAction<RSVPData[]>>
-) => {
+export const fetchGuests = async () => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_FIRE_BASE_URL}/RSVPS.json`
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests`
     );
-    const processedData = processAxiosData(data);
-    setRSVPs(processedData);
+    return data.data;
   } catch (error) {
     console.error(error);
   }
@@ -65,5 +55,75 @@ export const sendRSVP = async ({
     setError(true);
   } finally {
     setLoading(false);
+  }
+};
+
+export const login = async ({
+  formData,
+  setError,
+  setFormData,
+  setLoading,
+  setIsLoggedIn,
+}: {
+  formData: LoginData;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+  setFormData: React.Dispatch<SetStateAction<LoginData>>;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setIsLoggedIn: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/auth/login`,
+      formData
+    );
+    window.localStorage.setItem('token-wedding', data.token);
+    setFormData({ email: '', password: '' });
+    setIsLoggedIn(true);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const editGuest = async ({
+  body,
+  setLoading,
+  setError,
+}: {
+  body: Guests;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const { data } = await axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${body.id}`,
+      body
+    );
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const updateOrAddGuest = async ({
+  edit = true,
+  data,
+  setLoading,
+  setError,
+}: {
+  data: Guests;
+  edit?: boolean;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  if (edit) {
+    editGuest({ body: data, setLoading, setError });
   }
 };

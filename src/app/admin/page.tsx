@@ -2,23 +2,25 @@
 
 import '../../styles/main.scss';
 
-import { RSVPData } from '@/types/rsvp-types';
-import { fetchRSVPS } from '@/utilities/api-utils';
 import { useEffect, useState } from 'react';
-import RSVPTable from '../../components/RSVPTable';
+import AdminTable from '../../components/admin/AdminTable';
+import Login from '@/components/admin/Login';
+import { userAuth } from '@/utilities/auth';
 
 const Admin = () => {
-  const [RSVPs, setRSVPs] = useState<RSVPData[]>([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetchRSVPS(setRSVPs);
+    const userLoggedIn = userAuth();
+    if (userLoggedIn) {
+      setLoggedIn(true);
+    }
   }, []);
 
   return (
     <main>
-      <h1>RSVPs</h1>
-
-      <RSVPTable rsvps={RSVPs} />
+      <h1>Admin</h1>
+      {loggedIn ? <AdminTable /> : <Login setIsLoggedIn={setLoggedIn} />}
     </main>
   );
 };

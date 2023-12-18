@@ -8,12 +8,6 @@ const MoreInfoSign = () => {
   return (
     <>
       <button className="more-info-sign" onClick={() => setShowMoreInfo(true)}>
-        {/* <Image
-          src="/assets/more-info-sign.png"
-          width={122.66}
-          height={200}
-          alt=""
-        /> */}
         <Image
           src="/assets/more-info-sign-head.png"
           width={150}

@@ -19,7 +19,6 @@ const RsvpForm = ({
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target);
     const { id, value } = event.target;
     setRSVPData({ ...rsvpData, [id]: value });
   };
