@@ -1,0 +1,17 @@
+@import '../utils/colours';
+.admin-table {
+  &__table-row {
+    &--attending {
+      &-yes {
+        background-color: $lighter-green;
+      }
+      &-no {
+        background-color: $light-pink;
+      }
+
+      &-maybe {
+        background-color: $light-yellow;
+      }
+    }
+  }
+}
