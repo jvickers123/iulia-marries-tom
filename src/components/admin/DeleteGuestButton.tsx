@@ -2,7 +2,13 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import DeleteGuestModal from './DeleteGuestModal';
 
-const DeleteGuestButton = ({ guestId }: { guestId: string }) => {
+const DeleteGuestButton = ({
+  guestId,
+  guestName,
+}: {
+  guestId: string;
+  guestName: string;
+}) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
@@ -17,6 +23,7 @@ const DeleteGuestButton = ({ guestId }: { guestId: string }) => {
       {showDeleteModal && (
         <DeleteGuestModal
           guestId={guestId}
+          guestName={guestName}
           showDeleteModal={showDeleteModal}
           setShowDeleteModal={setShowDeleteModal}
         />

@@ -10,10 +10,12 @@ const DeleteGuestModal = ({
   guestId,
   setShowDeleteModal,
   showDeleteModal,
+  guestName,
 }: {
   guestId: string;
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
   showDeleteModal: boolean;
+  guestName: string;
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -27,15 +29,24 @@ const DeleteGuestModal = ({
     <Modal open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
       <ModalContentContainer>
         <form onSubmit={handleSubmit} className="delete-guest__form">
-          <h2>Are you sure you want to delete this guest?</h2>
+          <h2>Are you sure you want to delete {guestName}?</h2>
 
-          <Button variant="contained" onClick={() => setShowDeleteModal(false)}>
-            Cancel
-          </Button>
+          <div className="delete-guest__form-button-container">
+            <Button
+              variant="contained"
+              onClick={() => setShowDeleteModal(false)}
+              className="delete-guest__button">
+              Cancel
+            </Button>
 
-          <Button type="submit" variant="contained" color="error">
-            Delete
-          </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="error"
+              className="delete-guest__button">
+              Delete
+            </Button>
+          </div>
           {loading && <LoadingSpinner />}
           {error && (
             <p className="error">

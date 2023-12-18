@@ -1,0 +1,11 @@
+.delete-guest {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &__button {
+    margin: 1rem;
+  }
+}
