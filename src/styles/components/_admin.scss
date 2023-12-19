@@ -1,0 +1,10 @@
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__heading {
+    margin: 1rem 0;
+  }
+}

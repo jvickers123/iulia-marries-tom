@@ -37,6 +37,7 @@ const AdminTable = () => {
       <Button
         onClick={getData}
         variant="contained"
+        color="success"
         className="admin-table__button">
         Refresh
       </Button>

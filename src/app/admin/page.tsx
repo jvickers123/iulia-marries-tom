@@ -20,8 +20,8 @@ const Admin = () => {
   }, []);
 
   return (
-    <main>
-      <h1>Admin</h1>
+    <main className="admin-main">
+      <h1 className="admin-main__heading">Admin</h1>
       {loggedIn ? <AdminTable /> : <Login setIsLoggedIn={setLoggedIn} />}
     </main>
   );

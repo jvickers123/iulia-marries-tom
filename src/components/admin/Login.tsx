@@ -34,7 +34,6 @@ const Login = ({
   };
   return (
     <div className="login">
-      <h2 className="login__title">Login</h2>
       <form onSubmit={handleSubmit} className="admin-form">
         <TextField
           onChange={handleChange}
