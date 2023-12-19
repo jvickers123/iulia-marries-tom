@@ -7,7 +7,7 @@ export type Guests = {
   slug?: string;
   accomodation?: string;
   attending?: 'yes' | 'no' | 'maybe' | 'not-responded';
-  price: string;
-  fullDay?: boolean;
+  price?: string;
+  fullDay: boolean;
   notes?: string;
 };

@@ -2,7 +2,7 @@ import { Guests } from '@/types/admin-types';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import EditButton from './EditButton';
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import EditGuest from './Editguest';
 import DeleteGuestButton from './DeleteGuestButton';
 

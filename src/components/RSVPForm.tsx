@@ -1,5 +1,4 @@
 import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
-import { fetchGuests } from '@/utilities/api-utils';
 import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
 import {
   TextField,
@@ -10,7 +9,7 @@ import {
   Radio,
   Button,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import RsvpAutoCompleteMultiSelect from './RsvpAutoCompleteMultiSelect';
 
 const RsvpForm = ({
   setRSVPData,
@@ -21,8 +20,6 @@ const RsvpForm = ({
   rsvpData: RSVPData;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }) => {
-  const [guests, setGuests] = useState<RSVPGuest[]>([]);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     setRSVPData({ ...rsvpData, [id]: value });
@@ -33,15 +30,12 @@ const RsvpForm = ({
     setRSVPData({ ...rsvpData, attending: value as 'yes' | 'no' | 'maybe' });
   };
 
-  useEffect(() => {
-    const getPeopleInfo = async () => {
-      const peopleInfo = await getPeopleInfoFromAPI();
-
-      if (!peopleInfo) return;
-      setGuests(peopleInfo);
-    };
-    getPeopleInfo();
-  }, []);
+  const handleMultiSelectChange = (
+    _event: React.SyntheticEvent<Element>,
+    value: RSVPGuest[]
+  ) => {
+    setRSVPData({ ...rsvpData, people: value });
+  };
 
   return (
     <>
@@ -57,14 +51,9 @@ const RsvpForm = ({
           onChange={handleChange}
         />
 
-        <TextField
-          className="rsvp-form__input"
-          id="people"
-          label="Who are you replying for?"
-          variant="standard"
-          multiline
-          required
-          onChange={handleChange}
+        <RsvpAutoCompleteMultiSelect
+          onChange={handleMultiSelectChange}
+          value={rsvpData.people}
         />
 
         <FormControl className="rsvp-form__input">

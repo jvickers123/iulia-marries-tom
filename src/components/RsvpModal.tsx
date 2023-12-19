@@ -7,6 +7,7 @@ import RsvpForm from './RSVPForm';
 import LoadingSpinner from './LoadingSpinner';
 import FailedRSVP from './FailedRSVP';
 import SuccessRSVP from './SuccessRSVP';
+import { RSVPGuest } from '@/types/rsvp-types';
 
 const RsvpModal = ({
   closeModal,
@@ -16,6 +17,7 @@ const RsvpModal = ({
   showRSVP: boolean;
 }) => {
   const [rsvpData, setRSVPData] = useState(initialRSVPState);
+  const [recievedPeople, setRecievedPeople] = useState<RSVPGuest[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -32,6 +34,7 @@ const RsvpModal = ({
       setAttending,
       setMaybe,
       setRSVPData,
+      setRecievedPeople,
     });
   };
 
@@ -48,6 +51,7 @@ const RsvpModal = ({
             setMaybe={setMaybe}
             setAttending={setAttending}
             setSuccess={setSuccess}
+            guests={recievedPeople}
           />
         )}
         {!error && !loading && !success && (

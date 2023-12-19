@@ -1,4 +1,4 @@
-import { RSVPData } from '@/types/rsvp-types';
+import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
 import axios from 'axios';
 import React, { SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
@@ -24,6 +24,7 @@ export const sendRSVP = async ({
   setAttending,
   setMaybe,
   setRSVPData,
+  setRecievedPeople,
 }: {
   rsvpData: RSVPData;
   setLoading: React.Dispatch<SetStateAction<boolean>>;
@@ -32,15 +33,26 @@ export const sendRSVP = async ({
   setAttending: React.Dispatch<SetStateAction<boolean>>;
   setMaybe: React.Dispatch<SetStateAction<boolean>>;
   setRSVPData: React.Dispatch<SetStateAction<RSVPData>>;
+  setRecievedPeople: React.Dispatch<SetStateAction<RSVPGuest[]>>;
 }) => {
   setLoading(true);
   setError(false);
   try {
-    const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_FIRE_BASE_URL}/RSVPS.json`,
-      rsvpData
-    );
-    setSuccess(true);
+    rsvpData.people.forEach(async person => {
+      await editGuest({
+        body: {
+          id: person.id,
+          name: person.name,
+          fullDay: person.fullDay,
+          attending: rsvpData.attending,
+          notes: rsvpData.notes,
+          email: rsvpData.email,
+        },
+        setLoading,
+        setError,
+        setShowSuccessToast: setSuccess,
+      });
+    });
 
     if (rsvpData.attending === 'yes') {
       setAttending(true);
@@ -48,13 +60,11 @@ export const sendRSVP = async ({
     if (rsvpData.attending === 'maybe') {
       setMaybe(true);
     }
-
+    setRecievedPeople(rsvpData.people);
     setRSVPData(initialRSVPState);
   } catch (error) {
     console.error(error);
     setError(true);
-  } finally {
-    setLoading(false);
   }
 };
 
@@ -105,6 +115,7 @@ export const editGuest = async ({
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${body.id}`,
       body
     );
+    console.log(data);
     setShowSuccessToast(true);
   } catch (error) {
     console.error(error);

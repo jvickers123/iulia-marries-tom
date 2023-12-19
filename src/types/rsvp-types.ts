@@ -2,7 +2,7 @@ export type RSVPData = {
   email: string;
   attending: 'yes' | 'no' | 'maybe';
   notes: string;
-  people: string;
+  people: RSVPGuest[];
   id?: string;
 };
 
@@ -14,5 +14,5 @@ export enum ModalVariant {
 export type RSVPGuest = {
   id: string;
   name: string;
-  fullDay?: boolean;
+  fullDay: boolean;
 };

@@ -6,7 +6,7 @@ export const initialRSVPState: RSVPData = {
   email: '',
   attending: 'yes',
   notes: '',
-  people: '',
+  people: [],
 };
 
 export const emptyGuest: Guests = {
