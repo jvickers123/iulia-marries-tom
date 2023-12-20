@@ -32,7 +32,11 @@ const SuccessRSVP = ({
       <ul className="success-rsvp__list">
         {guests.map(guest => (
           <li key={guest.id} className="success-rsvp__list-item">
-            {guest.name} - {guest.fullDay ? 'Full day' : 'Evening'}
+            <p>{guest.name}</p>
+            <p>
+              You have been invited to{' '}
+              {guest.fullDay ? 'the whole day' : 'the evening celebrations'}
+            </p>
           </li>
         ))}
       </ul>
@@ -45,7 +49,6 @@ const SuccessRSVP = ({
       {maybe && (
         <p className="success-rsvp__paragraph">Hope to see you there!</p>
       )}
-      <p className="success-rsvp__paragraph">Have a lovely Christmas!</p>
 
       <Button variant="contained" color="secondary" onClick={handleClick}>
         Close

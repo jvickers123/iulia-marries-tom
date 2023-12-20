@@ -21,12 +21,12 @@ const Info = ({
       </p>
 
       <p className="info__para info__para--dark-green">
-        at Holwell Farmhouse, Holwell Farm, Exerter, EX16 9AD. Reception and
-        partying until late, accommodation available.
+        at Holwell Farmhouse, Holwell Farm, Exeter, EX16 9AD with partying until
+        late and accommodation available.
       </p>
 
       <p className="info__para info__para--black">
-        More info will be available here soon...
+        We will be in touch with more info soon...
       </p>
     </ModalContentContainer>
   </Modal>
