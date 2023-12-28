@@ -33,6 +33,17 @@ const RsvpAutoCompleteMultiSelect = ({
       options={guests}
       getOptionLabel={guest => guest.name}
       filterSelectedOptions
+      noOptionsText=""
+      filterOptions={(options, state) => {
+        if (state.inputValue.length <= 2) {
+          return [];
+        }
+
+        const filtered = options.filter(option =>
+          option.name.toLowerCase().includes(state.inputValue.toLowerCase())
+        );
+        return filtered;
+      }}
       getOptionKey={guest => guest.id}
       renderInput={params => (
         <TextField

@@ -43,11 +43,11 @@ const SuccessRSVP = ({
 
       {attending && (
         <p className="success-rsvp__paragraph">
-          We can&apos;t wait to see you there!
+          We can&apos;t wait to see you there
         </p>
       )}
       {maybe && (
-        <p className="success-rsvp__paragraph">Hope to see you there!</p>
+        <p className="success-rsvp__paragraph">Hope to see you there</p>
       )}
 
       <Button variant="contained" color="secondary" onClick={handleClick}>
