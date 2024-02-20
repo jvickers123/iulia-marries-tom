@@ -1,4 +1,4 @@
-import { Guests } from '@/types/admin-types';
+import { Guests, Tent, TentForm } from '@/types/admin-types';
 import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
 import { fetchGuests } from './api-utils';
 
@@ -18,6 +18,15 @@ export const emptyGuest: Guests = {
   price: '',
   fullDay: false,
   notes: '',
+};
+
+export const emptyAccomodation: TentForm = {
+  name: '',
+  id: '',
+  type: 'empty',
+  guests: [],
+  paid: false,
+  price: 0,
 };
 
 export const getPeopleInfoFromAPI = async () => {

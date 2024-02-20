@@ -11,3 +11,22 @@ export type Guests = {
   fullDay: boolean;
   notes?: string;
 };
+
+type TentBase = {
+  name: string;
+  id: string;
+  type: 'party' | 'empty';
+  slug?: string;
+  users?: [];
+  paid: boolean;
+  price: number;
+  notes?: string;
+};
+
+export type Tent = TentBase & {
+  guests: Guests[];
+};
+
+export type TentForm = TentBase & {
+  guests: string[];
+};

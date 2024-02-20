@@ -4,43 +4,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
-
 import Paper from '@mui/material/Paper';
-import { Button } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { fetchGuests } from '@/utilities/api-utils';
+import { useState } from 'react';
 import { Guests } from '@/types/admin-types';
-import LoadingSpinner from '../LoadingSpinner';
 import AdminTableRow from './AdminTableRow';
 import AddGuestButton from './AddGuestButton';
 import AddGuest from './AddGuest';
 
-const AdminTable = () => {
-  const [guests, setGuests] = useState<Guests[]>([]);
-  const [loading, setLoading] = useState(false);
+const AdminTable = ({ guests }: { guests: Guests[] }) => {
   const [showAddGuestForm, setShowAddGuestForm] = useState(false);
 
-  const getData = async () => {
-    setLoading(true);
-    const data = await fetchGuests();
-    setLoading(false);
-
-    if (!data) return;
-    setGuests(data);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
   return (
     <>
-      <Button
-        onClick={getData}
-        variant="contained"
-        color="success"
-        className="admin-table__button">
-        Refresh
-      </Button>
+      <h2>Guests</h2>
       <TableContainer component={Paper} className="rsvp-table">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -57,7 +33,7 @@ const AdminTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {guests.map(guest => (
+            {guests?.map(guest => (
               <AdminTableRow key={guest.id} guest={guest} />
             ))}
           </TableBody>
@@ -70,7 +46,6 @@ const AdminTable = () => {
           showAddGuestForm={showAddGuestForm}
         />
       )}
-      {loading && <LoadingSpinner />}
     </>
   );
 };

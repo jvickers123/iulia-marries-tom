@@ -3,14 +3,12 @@
 import '../../styles/main.scss';
 
 import { useEffect, useState } from 'react';
-import AdminTable from '../../components/admin/AdminTable';
-import Login from '@/components/admin/Login';
+import Login from '../../components/admin/Login';
 import { userAuth } from '@/utilities/auth';
-import Success from '@/components/admin/Success';
+import AdminContainer from '../../components/admin/AdminContainer';
 
 const Admin = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   useEffect(() => {
     const userLoggedIn = userAuth();
@@ -22,7 +20,8 @@ const Admin = () => {
   return (
     <main className="admin-main">
       <h1 className="admin-main__heading">Admin</h1>
-      {loggedIn ? <AdminTable /> : <Login setIsLoggedIn={setLoggedIn} />}
+
+      {loggedIn ? <AdminContainer /> : <Login setIsLoggedIn={setLoggedIn} />}
     </main>
   );
 };

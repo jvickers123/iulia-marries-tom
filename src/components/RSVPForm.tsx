@@ -9,7 +9,7 @@ import {
   Radio,
   Button,
 } from '@mui/material';
-import RsvpAutoCompleteMultiSelect from './RsvpAutoCompleteMultiSelect';
+import AutoCompleteMultiSelect from './AutoCompleteMultiSelect';
 
 const RsvpForm = ({
   setRSVPData,
@@ -51,7 +51,7 @@ const RsvpForm = ({
           onChange={handleChange}
         />
 
-        <RsvpAutoCompleteMultiSelect
+        <AutoCompleteMultiSelect
           onChange={handleMultiSelectChange}
           value={rsvpData.people}
         />

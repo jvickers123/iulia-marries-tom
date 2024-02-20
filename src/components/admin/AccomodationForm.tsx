@@ -1,4 +1,4 @@
-import { Guests } from '@/types/admin-types';
+import { Tent } from '@/types/admin-types';
 import {
   TextField,
   Button,
@@ -9,16 +9,32 @@ import {
   RadioGroup,
 } from '@mui/material';
 import { FormEvent, useEffect, useState } from 'react';
-import { emptyGuest } from '@/utilities/form-utils';
+import { emptyAccomodation } from '@/utilities/form-utils';
 import LoadingSpinner from '../LoadingSpinner';
-import { updateOrAddGuest } from '@/utilities/api-utils';
 import Success from './Success';
+import { getGuestNamesOneString } from '@/utilities/data';
+import AutoCompleteMultiSelect from '../AutoCompleteMultiSelect';
+import { RSVPGuest } from '@/types/rsvp-types';
 
-const GuestForm = ({ guest }: { guest?: Guests }) => {
-  const [formData, setFormData] = useState(emptyGuest);
+const GuestForm = ({ tent }: { tent: Tent }) => {
+  const [formData, setFormData] = useState(emptyAccomodation);
+  const [guests, setGuests] = useState(tent.guests);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
+
+  const guestNames = getGuestNamesOneString(tent?.guests);
+
+  const handleMultiSelectChange = (
+    _event: React.SyntheticEvent<Element>,
+    value: RSVPGuest[]
+  ) => {
+    setGuests(value);
+    const guestIDs = value.map(guest => guest.id);
+    setFormData(prev => {
+      return { ...prev, guests: guestIDs };
+    });
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
@@ -26,43 +42,44 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
     setError(false);
   };
 
-  const handleRadioChangeAttending = (
+  const handleRadioChangeTentType = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target;
     setFormData({
       ...formData,
-      attending: value as 'yes' | 'no' | 'maybe' | 'not-responded',
+      type: value as 'party' | 'empty',
     });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    updateOrAddGuest({
-      edit: guest ? true : false,
-      data: formData,
-      setLoading,
-      setError,
-      setShowSuccessToast,
-      setFormData,
-    });
+    // updateOrAddGuest({
+    //   edit: tent ? true : false,
+    //   data: formData,
+    //   setLoading,
+    //   setError,
+    //   setShowSuccessToast,
+    //   setFormData,
+    // });
   };
 
-  const handleRadioChangeFullDay = (
+  const handleRadioChangePaid = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target;
     setFormData({
       ...formData,
-      fullDay: value === 'fullDay',
+      paid: value === 'paid',
     });
   };
 
   useEffect(() => {
-    if (guest) {
-      setFormData(guest);
+    if (tent) {
+      const guests = tent.guests.map(guest => guest.id);
+      setFormData({ ...tent, guests });
     }
-  }, [guest]);
+  }, [tent]);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -76,75 +93,51 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
 
   return (
     <>
-      <h2 className="edit-form__heading">
-        {guest ? `Edit ${guest.name}` : 'add new guest'}
-      </h2>
+      <h2 className="edit-form__heading">{`Edit tent for ${guestNames}`}</h2>
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="edit-form__flex-container">
-          <TextField
-            onChange={handleChange}
-            className="edit-form__input"
-            id="name"
-            label="Name"
-            variant="standard"
-            type="text"
-            value={formData.name}
-            required
-          />
-          <TextField
-            onChange={handleChange}
-            className="edit-form__input"
-            id="email"
-            value={formData.email}
-            label="Email"
-            variant="standard"
-            type="email"
-          />
-        </div>
-        <div className="edit-form__flex-container">
           <FormControl className="edit-form__input">
-            <FormLabel id="attending-label">Attending</FormLabel>
+            <FormLabel id="type-label">Accomodation Type</FormLabel>
+            <AutoCompleteMultiSelect
+              onChange={handleMultiSelectChange}
+              value={guests}
+              isRSVPForm={false}
+            />
             <RadioGroup
-              aria-labelledby="attending-label"
-              defaultValue={formData.attending}
-              value={formData.attending}
-              name="radio-buttons-group-attending"
+              aria-labelledby="type-label"
+              defaultValue={formData.type}
+              value={formData.type}
+              name="radio-buttons-group-type"
               row
-              id="attending"
-              onChange={handleRadioChangeAttending}>
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="no" control={<Radio />} label="No" />
+              id="type"
+              onChange={handleRadioChangeTentType}>
               <FormControlLabel
-                value="maybe"
+                value="party"
                 control={<Radio />}
-                label="Maybe"
+                label="Party"
               />
               <FormControlLabel
-                value="not-responded"
+                value="empty"
                 control={<Radio />}
-                label="Not Responded"
+                label="Empty"
               />
             </RadioGroup>
           </FormControl>
           <FormControl className="edit-form__input">
-            <FormLabel id="full-day-label">Full Day?</FormLabel>
+            <FormLabel id="full-day-label">Paid?</FormLabel>
             <RadioGroup
               aria-labelledby="full-day-label"
-              defaultValue={formData.fullDay ? 'fullDay' : 'ReceptionOnly'}
-              value={formData.fullDay ? 'fullDay' : 'ReceptionOnly'}
+              defaultValue={formData.paid ? 'paid' : 'not-paid'}
+              value={formData.paid ? 'paid' : 'not-paid'}
               name="radio-buttons-group-full-day"
               row
-              id="fullDay"
-              onChange={handleRadioChangeFullDay}>
+              id="paid"
+              onChange={handleRadioChangePaid}>
+              <FormControlLabel value="paid" control={<Radio />} label="Paid" />
               <FormControlLabel
-                value="fullDay"
+                value="not-paid"
                 control={<Radio />}
-                label="Full Day"
-              />
-              <FormControlLabel
-                value="ReceptionOnly"
-                control={<Radio />}
-                label="reception"
+                label="Not Paid"
               />
             </RadioGroup>
           </FormControl>
@@ -152,13 +145,11 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
         <div className="edit-form__flex-container">
           <TextField
             onChange={handleChange}
-            value={formData.accomodation}
+            value={formData.price}
             className="edit-form__input"
-            id="accomodation"
-            label="Accomodation"
-            multiline
-            variant="standard"
-            type="text"
+            id="price"
+            label="Price"
+            type="number"
           />
           <TextField
             onChange={handleChange}
@@ -172,7 +163,7 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
           />
         </div>
         <Button className="edit-form__button" variant="contained" type="submit">
-          {guest ? 'Update' : 'Add Guest'}
+          Update
         </Button>
         {loading && <LoadingSpinner />}
         {showSuccessToast && <Success />}

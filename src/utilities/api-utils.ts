@@ -5,6 +5,24 @@ import { emptyGuest, initialRSVPState } from './form-utils';
 import { Guests, LoginData } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
 
+export const fetchAccomodationAndGuests = async () => {
+  try {
+    const token = getTokenFromLocal();
+
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/all`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const fetchGuests = async () => {
   try {
     const { data } = await axios.get(

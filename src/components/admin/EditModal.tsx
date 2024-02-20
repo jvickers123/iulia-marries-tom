@@ -1,25 +1,28 @@
 import Modal from '@mui/material/Modal';
 import ModalContentContainer from '../ModalContentContainer';
 import { SetStateAction } from 'react';
-import { Guests } from '@/types/admin-types';
+import { Guests, Tent } from '@/types/admin-types';
 import GuestForm from './GuestForm';
-import { ModalVariant } from '@/types/rsvp-types';
+import AccomodationForm from './AccomodationForm';
 
-const EditGuest = ({
+const EditModal = ({
   editing,
   setEditing,
   guest,
+  tent,
 }: {
   editing: boolean;
   setEditing: React.Dispatch<SetStateAction<boolean>>;
-  guest: Guests;
+  guest?: Guests;
+  tent?: Tent;
 }) => {
   return (
     <Modal open={editing} onClose={() => setEditing(false)}>
       <ModalContentContainer>
-        <GuestForm guest={guest} />
+        {tent && <AccomodationForm tent={tent} />}
+        {guest && <GuestForm guest={guest} />}
       </ModalContentContainer>
     </Modal>
   );
 };
-export default EditGuest;
+export default EditModal;
