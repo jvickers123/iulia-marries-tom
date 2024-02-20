@@ -15,7 +15,7 @@ export type Guests = {
 type TentBase = {
   name: string;
   id: string;
-  type: 'party' | 'empty';
+  type: 'party' | 'empty' | 'luxury';
   slug?: string;
   users?: [];
   paid: boolean;

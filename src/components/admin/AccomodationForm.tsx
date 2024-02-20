@@ -15,8 +15,9 @@ import Success from './Success';
 import { getGuestNamesOneString } from '@/utilities/data';
 import AutoCompleteMultiSelect from '../AutoCompleteMultiSelect';
 import { RSVPGuest } from '@/types/rsvp-types';
+import { editAccomodation } from '@/utilities/api-utils';
 
-const GuestForm = ({ tent }: { tent: Tent }) => {
+const AccomodationForm = ({ tent }: { tent: Tent }) => {
   const [formData, setFormData] = useState(emptyAccomodation);
   const [guests, setGuests] = useState(tent.guests);
   const [error, setError] = useState(false);
@@ -48,20 +49,18 @@ const GuestForm = ({ tent }: { tent: Tent }) => {
     const { value } = event.target;
     setFormData({
       ...formData,
-      type: value as 'party' | 'empty',
+      type: value as 'party' | 'empty' | 'luxury',
     });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // updateOrAddGuest({
-    //   edit: tent ? true : false,
-    //   data: formData,
-    //   setLoading,
-    //   setError,
-    //   setShowSuccessToast,
-    //   setFormData,
-    // });
+    editAccomodation({
+      body: formData,
+      setLoading,
+      setError,
+      setShowSuccessToast,
+    });
   };
 
   const handleRadioChangePaid = (
@@ -112,14 +111,19 @@ const GuestForm = ({ tent }: { tent: Tent }) => {
               id="type"
               onChange={handleRadioChangeTentType}>
               <FormControlLabel
+                value="empty"
+                control={<Radio />}
+                label="Empty"
+              />
+              <FormControlLabel
                 value="party"
                 control={<Radio />}
                 label="Party"
               />
               <FormControlLabel
-                value="empty"
+                value="luxury"
                 control={<Radio />}
-                label="Empty"
+                label="Luxury"
               />
             </RadioGroup>
           </FormControl>
@@ -176,4 +180,4 @@ const GuestForm = ({ tent }: { tent: Tent }) => {
   );
 };
 
-export default GuestForm;
+export default AccomodationForm;

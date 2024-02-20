@@ -18,7 +18,7 @@ const AdminTableRow = ({ tent }: { tent: Tent }) => {
     <>
       <TableRow
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        className={`admin-table__table-row--attending-${paid}`}>
+        className={`admin-table__table-row--attending-${paid && 'yes'}`}>
         <TableCell>{guestNames}</TableCell>
         <TableCell>{type}</TableCell>
         <TableCell>{price}</TableCell>

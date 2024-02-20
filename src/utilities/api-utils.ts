@@ -2,7 +2,7 @@ import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
 import axios from 'axios';
 import React, { SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
-import { Guests, LoginData } from '@/types/admin-types';
+import { Guests, LoginData, TentForm } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
 
 export const fetchAccomodationAndGuests = async () => {
@@ -129,9 +129,42 @@ export const editGuest = async ({
 }) => {
   setLoading(true);
   try {
-    const { data } = await axios.put(
+    await axios.put(
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${body.id}`,
       body
+    );
+    setShowSuccessToast(true);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const editAccomodation = async ({
+  body,
+  setLoading,
+  setError,
+  setShowSuccessToast,
+}: {
+  body: TentForm;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const token = getTokenFromLocal();
+
+    const { data } = await axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/accomodation/${body.id}`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     console.log(data);
     setShowSuccessToast(true);

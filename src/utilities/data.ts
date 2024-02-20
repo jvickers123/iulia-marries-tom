@@ -22,6 +22,5 @@ export const getData = async ({
 
 export const getGuestNamesOneString = (guests?: Guests[]) => {
   if (!guests) return '';
-
-  return guests.reduce((acc, guest) => `${acc && ', '}${guest.name}`, '');
+  return guests.reduce((acc, guest) => `${acc && `${acc}, `}${guest.name}`, '');
 };
