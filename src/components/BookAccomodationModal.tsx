@@ -1,22 +1,26 @@
 import Modal from '@mui/material/Modal';
-import { initialRSVPState } from '@/utilities/form-utils';
-import { useState } from 'react';
+import { initialAccomodationState } from '@/utilities/form-utils';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { sendRSVP } from '@/utilities/api-utils';
 import ModalContentContainer from './ModalContentContainer';
-import RsvpForm from './RSVPForm';
 import LoadingSpinner from './LoadingSpinner';
 import FailedAPICall from './FailedAPiCall';
 import SuccessRSVP from './SuccessRSVP';
-import { RSVPGuest } from '@/types/guest-page-types';
+import { RSVPGuest, ShowPanels } from '@/types/guest-page-types';
+import AccomodationForm from './AccomodationForm';
 
-const RsvpModal = ({
+const BookAccomodationModal = ({
   closeModal,
-  showRSVP,
+  showModal,
+  openAccomodationInfo,
 }: {
   closeModal: () => void;
-  showRSVP: boolean;
+  showModal: boolean;
+  openAccomodationInfo: () => void;
 }) => {
-  const [rsvpData, setRSVPData] = useState(initialRSVPState);
+  const [accomodationData, setAccomodationData] = useState(
+    initialAccomodationState
+  );
   const [recievedPeople, setRecievedPeople] = useState<RSVPGuest[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -26,20 +30,10 @@ const RsvpModal = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    sendRSVP({
-      rsvpData,
-      setLoading,
-      setError,
-      setSuccess,
-      setAttending,
-      setMaybe,
-      setRSVPData,
-      setRecievedPeople,
-    });
   };
 
   return (
-    <Modal onClose={closeModal} open={showRSVP}>
+    <Modal onClose={closeModal} open={showModal}>
       <ModalContentContainer>
         {loading && <LoadingSpinner />}
         {error && <FailedAPICall setError={setError} />}
@@ -55,10 +49,11 @@ const RsvpModal = ({
           />
         )}
         {!error && !loading && !success && (
-          <RsvpForm
-            setRSVPData={setRSVPData}
-            rsvpData={rsvpData}
+          <AccomodationForm
+            setAccomodationData={setAccomodationData}
+            accomodationData={accomodationData}
             handleSubmit={handleSubmit}
+            openAccomodationInfo={openAccomodationInfo}
           />
         )}
       </ModalContentContainer>
@@ -66,4 +61,4 @@ const RsvpModal = ({
   );
 };
 
-export default RsvpModal;
+export default BookAccomodationModal;

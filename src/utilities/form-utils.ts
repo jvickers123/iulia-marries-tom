@@ -1,6 +1,13 @@
-import { Guests, Tent, TentForm } from '@/types/admin-types';
-import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
+import { Guests, TentForm } from '@/types/admin-types';
+import { RSVPData, RSVPGuest, TentData } from '@/types/guest-page-types';
 import { fetchGuests } from './api-utils';
+
+export const initialAccomodationState: TentData = {
+  email: '',
+  guests: [],
+  type: 'empty',
+  notes: '',
+};
 
 export const initialRSVPState: RSVPData = {
   email: '',

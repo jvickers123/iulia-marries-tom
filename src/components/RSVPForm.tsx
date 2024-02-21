@@ -1,4 +1,4 @@
-import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
+import { RSVPData, RSVPGuest } from '@/types/guest-page-types';
 import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
 import {
   TextField,
@@ -39,10 +39,10 @@ const RsvpForm = ({
 
   return (
     <>
-      <h2 className="rsvp-form__title modal-heading">Send RSVP</h2>
-      <form className="rsvp-form" onSubmit={handleSubmit}>
+      <h2 className="booking-form__title modal-heading">Send RSVP</h2>
+      <form className="booking-form" onSubmit={handleSubmit}>
         <TextField
-          className="rsvp-form__input"
+          className="booking-form__input"
           id="email"
           label="Email"
           variant="standard"
@@ -56,7 +56,7 @@ const RsvpForm = ({
           value={rsvpData.people}
         />
 
-        <FormControl className="rsvp-form__input">
+        <FormControl className="booking-form__input">
           <FormLabel id="attending-label">Will you be attending?</FormLabel>
           <RadioGroup
             aria-labelledby="attending-label"
@@ -72,7 +72,7 @@ const RsvpForm = ({
         </FormControl>
 
         <TextField
-          className="rsvp-form__input"
+          className="booking-form__input"
           id="notes"
           label="Notes"
           variant="standard"
@@ -83,7 +83,7 @@ const RsvpForm = ({
         <Button
           type="submit"
           variant="contained"
-          className="rsvp-form__submit-btn"
+          className="booking-form__submit-btn"
           size="large">
           Send
         </Button>

@@ -1,4 +1,4 @@
-import { RSVPData, RSVPGuest } from '@/types/rsvp-types';
+import { RSVPData, RSVPGuest } from '@/types/guest-page-types';
 import axios from 'axios';
 import React, { SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
@@ -61,7 +61,7 @@ export const sendRSVP = async ({
         body: {
           id: person.id,
           name: person.name,
-          fullDay: person.fullDay,
+          fullDay: person.fullDay!,
           attending: rsvpData.attending,
           notes: rsvpData.notes,
           email: rsvpData.email,

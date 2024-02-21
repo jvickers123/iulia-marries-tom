@@ -1,4 +1,4 @@
-import { ModalVariant } from '@/types/rsvp-types';
+import { ModalVariant } from '@/types/guest-page-types';
 import { forwardRef } from 'react';
 
 interface ModalContentContainerProps {

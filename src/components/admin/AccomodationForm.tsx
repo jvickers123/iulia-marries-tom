@@ -14,7 +14,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import Success from './Success';
 import { getGuestNamesOneString } from '@/utilities/data';
 import AutoCompleteMultiSelect from '../AutoCompleteMultiSelect';
-import { RSVPGuest } from '@/types/rsvp-types';
+import { RSVPGuest } from '@/types/guest-page-types';
 import { editAccomodation } from '@/utilities/api-utils';
 
 const AccomodationForm = ({ tent }: { tent: Tent }) => {

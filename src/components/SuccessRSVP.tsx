@@ -1,4 +1,4 @@
-import { RSVPGuest } from '@/types/rsvp-types';
+import { RSVPGuest } from '@/types/guest-page-types';
 import { Button } from '@mui/material';
 import { SetStateAction } from 'react';
 

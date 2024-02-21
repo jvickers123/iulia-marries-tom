@@ -3,9 +3,10 @@
 @import './components/adminForm';
 @import './components/adminTable';
 @import './components/deleteGuest';
+@import './components/drawerMenu';
 @import './components/editForm';
 @import './components/background';
-@import './components/failedRsvp';
+@import './components/failedAPICall';
 @import './components/login';
 @import './components/main';
 @import './components/modalContentContainer';
@@ -15,6 +16,6 @@
 @import './components/loadingSpinner';
 @import './components/titleSign';
 @import './components/RSVPButton';
-@import './components/RSVPForm';
+@import './components/BookingForm';
 @import './components/rsvpTable';
 @import './components/successRsvp';

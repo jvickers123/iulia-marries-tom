@@ -1,0 +1,23 @@
+.drawer-menu {
+  &__open-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+  }
+
+  &__open-btn-image {
+    height: 3rem;
+    width: 3rem;
+    color: $light-green;
+  }
+
+  &__list-heading {
+    padding: 1rem;
+    color: $purple;
+  }
+
+  &__list-item {
+    color: $light-green;
+  }
+}

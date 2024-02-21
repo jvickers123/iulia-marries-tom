@@ -1,6 +1,6 @@
 import Modal from '@mui/material/Modal';
 import ModalContentContainer from './ModalContentContainer';
-import { ModalVariant } from '@/types/rsvp-types';
+import { ModalVariant } from '@/types/guest-page-types';
 
 const Info = ({
   showMoreInfo,
@@ -13,7 +13,7 @@ const Info = ({
     <ModalContentContainer variant={ModalVariant.INFO}>
       <h2 className="info__heading">Iulia and Tom</h2>
 
-      <p className="info__para info__para--green">
+      <p className="info__para info__para--green info__para--large">
         warmly and formally invite you to celebrate their marriage
       </p>
       <p className="info__para info__para--purple">
@@ -25,8 +25,9 @@ const Info = ({
         late and accommodation available.
       </p>
 
-      <p className="info__para info__para--black">
-        We will be in touch with more info soon...
+      <p className="info__para info__para--black info__para--margin-top">
+        Click on RSVP to let us know if you can make it. And you can book
+        accomodation on here too.
       </p>
     </ModalContentContainer>
   </Modal>

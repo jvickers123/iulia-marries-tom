@@ -1,17 +1,20 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
-import { RSVPGuest } from '@/types/rsvp-types';
+import { RSVPGuest } from '@/types/guest-page-types';
 import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
+import { create } from 'domain';
 
 const AutoCompleteMultiSelect = ({
   onChange,
   value,
   isRSVPForm = true,
+  isBookingForm = false,
 }: {
   onChange: (event: React.SyntheticEvent<Element>, value: RSVPGuest[]) => void;
   value: RSVPGuest[];
   isRSVPForm?: boolean;
+  isBookingForm?: boolean;
 }) => {
   const [guests, setGuests] = useState<RSVPGuest[]>([]);
 
@@ -50,8 +53,14 @@ const AutoCompleteMultiSelect = ({
       renderInput={params => (
         <TextField
           {...params}
-          label={isRSVPForm ? 'Who are you replying for?' : 'Guests'}
-          className="rsvp-form__input"
+          label={
+            isRSVPForm
+              ? 'Who are you replying for?'
+              : isBookingForm
+              ? 'Who are you booking for?'
+              : 'Guests'
+          }
+          className="booking-form__input"
           placeholder="Type to find your name"
         />
       )}

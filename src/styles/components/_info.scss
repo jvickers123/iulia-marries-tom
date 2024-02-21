@@ -16,8 +16,6 @@
 
     &--green {
       color: $light-green;
-      font-size: 1.7rem;
-      margin-bottom: 2rem;
     }
 
     &--purple {
@@ -29,8 +27,25 @@
     }
 
     &--black {
-      margin-top: 2rem;
       color: $black;
     }
+
+    &--large {
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+
+    &--margin-top {
+      margin-top: 2rem;
+    }
+  }
+
+  &__image {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+  }
+
+  &__button {
+    margin-top: 2rem;
   }
 }

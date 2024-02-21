@@ -2,7 +2,7 @@
 @import '../utils/utils';
 
 .modal-content-container {
-  .rsvp-form {
+  .booking-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +13,10 @@
       margin-bottom: 2rem;
     }
 
+    &__para {
+      text-align: center;
+    }
+
     &__input {
       width: 250px;
       margin-bottom: 2rem;
@@ -20,6 +24,10 @@
 
     &__submit-btn {
       margin-top: 2rem;
+    }
+
+    &__warning-text {
+      color: red;
     }
 
     #email {

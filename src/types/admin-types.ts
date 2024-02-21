@@ -8,7 +8,7 @@ export type Guests = {
   accomodation?: string;
   attending?: 'yes' | 'no' | 'maybe' | 'not-responded';
   price?: string;
-  fullDay: boolean;
+  fullDay?: boolean;
   notes?: string;
 };
 
