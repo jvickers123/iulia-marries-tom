@@ -218,7 +218,7 @@ const AccomodationForm = ({
           disabled={!isValidBookingData}
           className="booking-form__submit-btn"
           size="large">
-          Send
+          Book Accomodation
         </Button>
 
         <Button
