@@ -1,9 +1,5 @@
 @import '../utils/colours';
 .admin-table {
-  &__button {
-    align-self: flex-start;
-    margin-left: 1rem;
-  }
   &__table-row {
     &--attending {
       &-yes {
@@ -22,4 +18,8 @@
 
 .admin-button-container {
   padding-bottom: 1rem;
+  .admin-table__button {
+    align-self: flex-start;
+    margin-left: 1rem;
+  }
 }
