@@ -99,7 +99,7 @@ const AccomodationInfo = ({
         </p>
 
         <p className="info__para info__para--green info__para--margin-top">
-          Once you have chosen one you can book it here and you will recieve an
+          Once you have chosen, you can book it here and you will recieve an
           email about how to pay for it.
         </p>
 
