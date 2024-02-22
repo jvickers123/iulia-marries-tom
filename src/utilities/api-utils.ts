@@ -97,13 +97,13 @@ Type: ${booking.type} tent
 Guests: ${booking.name}
 Cost: £${booking.price}.
 
-In order to pay please a bank transfer to:
+In order to pay please send a bank transfer to:
 
 Account Name: ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}
 Sort Code: ${process.env.NEXT_PUBLIC_SORT_CODE}
 Account Number: ${process.env.NEXT_PUBLIC_ACCOUNT_NUMBER}
 
-Thanks and looking forward to seeing you there!
+Thanks and looking forward to seeing you there,
 
 Thomas and Iulia xxx
   `;
