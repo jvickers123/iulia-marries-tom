@@ -6,16 +6,18 @@ import { useState } from 'react';
 import LoadingSpinner from '../LoadingSpinner';
 import Success from './Success';
 
-const DeleteGuestModal = ({
+const DeleteModal = ({
   guestId,
   setShowDeleteModal,
   showDeleteModal,
   guestName,
+  isAccomodation,
 }: {
   guestId: string;
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
   showDeleteModal: boolean;
   guestName: string;
+  isAccomodation: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -23,7 +25,13 @@ const DeleteGuestModal = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    deleteGuest({ guestId, setError, setLoading, setShowSuccessToast });
+    deleteGuest({
+      guestId,
+      setError,
+      setLoading,
+      setShowSuccessToast,
+      isAccomodation,
+    });
   };
   return (
     <Modal open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
@@ -60,4 +68,4 @@ const DeleteGuestModal = ({
   );
 };
 
-export default DeleteGuestModal;
+export default DeleteModal;

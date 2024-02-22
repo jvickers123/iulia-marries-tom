@@ -15,6 +15,7 @@ export type RSVPGuest = {
   id: string;
   name: string;
   fullDay?: boolean;
+  email?: string;
 };
 
 export type ShowPanels = {
@@ -42,4 +43,6 @@ export type TentData = {
   guests: RSVPGuest[];
   id?: string;
   notes: string;
+  price: number;
+  name: string;
 };

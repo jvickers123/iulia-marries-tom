@@ -15,10 +15,18 @@
 
     &__para {
       text-align: center;
+
+      &--green {
+        color: $light-green;
+      }
+
+      &--warning-text {
+        color: red;
+      }
     }
 
     &__input {
-      width: 250px;
+      width: 16rem;
       margin-bottom: 2rem;
     }
 
@@ -26,14 +34,18 @@
       margin-top: 2rem;
     }
 
-    &__warning-text {
-      color: red;
-    }
-
     #email {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 600;
       letter-spacing: 0.7px;
+    }
+  }
+
+  @include respond(tablet) {
+    .booking-form {
+      &__input {
+        width: 25rem;
+      }
     }
   }
 }

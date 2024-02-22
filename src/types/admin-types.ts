@@ -6,6 +6,7 @@ export type Guests = {
   email?: string;
   slug?: string;
   accomodation?: string;
+  accomodationTents?: TentForm;
   attending?: 'yes' | 'no' | 'maybe' | 'not-responded';
   price?: string;
   fullDay?: boolean;

@@ -4,7 +4,7 @@ import TableRow from '@mui/material/TableRow';
 import EditButton from './EditButton';
 import { useState } from 'react';
 import EditModal from './EditModal';
-import DeleteGuestButton from './DeleteGuestButton';
+import DeleteButton from './DeleteButton';
 import { getGuestNamesOneString } from '@/utilities/data';
 
 const AdminTableRow = ({ tent }: { tent: Tent }) => {
@@ -28,7 +28,7 @@ const AdminTableRow = ({ tent }: { tent: Tent }) => {
           <EditButton setEditing={setEditing} />
         </TableCell>
         <TableCell>
-          <DeleteGuestButton guestId={id} guestName={name} />
+          <DeleteButton guestId={id} guestName={name} isAccomodation />
         </TableCell>
       </TableRow>
       {editing && (

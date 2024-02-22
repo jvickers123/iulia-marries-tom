@@ -4,12 +4,13 @@ import TableRow from '@mui/material/TableRow';
 import EditButton from './EditButton';
 import { useState } from 'react';
 import EditModal from './EditModal';
-import DeleteGuestButton from './DeleteGuestButton';
+import DeleteButton from './DeleteButton';
 
 const AdminTableRow = ({ guest }: { guest: Guests }) => {
   const [editing, setEditing] = useState(false);
+  console.log(guest);
 
-  const { id, name, email, attending, fullDay, accomodation, price, notes } =
+  const { id, name, email, attending, fullDay, accomodationTents, notes } =
     guest;
 
   return (
@@ -23,14 +24,20 @@ const AdminTableRow = ({ guest }: { guest: Guests }) => {
         </TableCell>
         <TableCell>{attending}</TableCell>
         <TableCell>{fullDay ? 'Full Day' : 'Reception Only'}</TableCell>
-        <TableCell>{accomodation}</TableCell>
-        <TableCell>{price}</TableCell>
+        <TableCell>{accomodationTents ? 'Booked' : 'Not booked'}</TableCell>
+        <TableCell>
+          {accomodationTents
+            ? accomodationTents.paid
+              ? 'paid'
+              : 'Not paid'
+            : ''}
+        </TableCell>
         <TableCell>{notes}</TableCell>
         <TableCell>
           <EditButton setEditing={setEditing} />
         </TableCell>
         <TableCell>
-          <DeleteGuestButton guestId={id} guestName={name} />
+          <DeleteButton guestId={id} guestName={name} />
         </TableCell>
       </TableRow>
       {editing && (

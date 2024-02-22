@@ -1,6 +1,6 @@
-import { RSVPData, RSVPGuest } from '@/types/guest-page-types';
+import { RSVPData, RSVPGuest, TentData } from '@/types/guest-page-types';
 import axios from 'axios';
-import React, { SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
 import { Guests, LoginData, TentForm } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
@@ -83,6 +83,74 @@ export const sendRSVP = async ({
   } catch (error) {
     console.error(error);
     setError(true);
+  }
+};
+
+export const sendPaymentEmail = async (booking: TentData) => {
+  const message = `Hi,
+
+Thanks for booking accomodation for Thomas and Iulia's wedding!
+  
+Your booking is as follows: 
+
+Type: ${booking.type} tent 
+Guests: ${booking.name}
+Cost: £${booking.price}.
+
+In order to pay please a bank transfer to:
+
+Account Name: ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+Sort Code: ${process.env.NEXT_PUBLIC_SORT_CODE}
+Account Number: ${process.env.NEXT_PUBLIC_ACCOUNT_NUMBER}
+
+Thanks and looking forward to seeing you there!
+
+Thomas and Iulia xxx
+  `;
+  try {
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`,
+      {
+        email: booking.email,
+        message,
+      }
+    );
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const bookAccomodation = async ({
+  accomodationData,
+  setLoading,
+  setSuccess,
+  setError,
+}: {
+  accomodationData: TentData;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
+  setSuccess: React.Dispatch<SetStateAction<boolean>>;
+  setError: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+
+  try {
+    const guestIds = accomodationData.guests.map(guest => guest.id);
+
+    const formattedData = { ...accomodationData, guests: guestIds };
+
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/accomodation`,
+      formattedData
+    );
+
+    setSuccess(true);
+    sendPaymentEmail(accomodationData);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -247,18 +315,22 @@ export const deleteGuest = async ({
   setError,
   setLoading,
   setShowSuccessToast,
+  isAccomodation,
 }: {
   guestId: string;
   setError: React.Dispatch<SetStateAction<boolean>>;
   setLoading: React.Dispatch<SetStateAction<boolean>>;
   setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+  isAccomodation: boolean;
 }) => {
   setLoading(true);
   try {
     const token = getTokenFromLocal();
 
-    const { data } = await axios.delete(
-      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${guestId}`,
+    await axios.delete(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/${
+        isAccomodation ? 'accomodation' : 'guests'
+      }/${guestId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

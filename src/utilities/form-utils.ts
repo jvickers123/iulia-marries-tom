@@ -1,12 +1,15 @@
 import { Guests, TentForm } from '@/types/admin-types';
 import { RSVPData, RSVPGuest, TentData } from '@/types/guest-page-types';
 import { fetchGuests } from './api-utils';
+import { tentCosts } from './accomodation';
 
 export const initialAccomodationState: TentData = {
   email: '',
   guests: [],
   type: 'empty',
   notes: '',
+  price: tentCosts.emptyTent.initialPrice,
+  name: '',
 };
 
 export const initialRSVPState: RSVPData = {
@@ -45,6 +48,7 @@ export const getPeopleInfoFromAPI = async () => {
       id: guest.id,
       name: guest.name,
       fullDay: guest.fullDay,
+      email: guest.email,
     }));
 
     return mappedData;

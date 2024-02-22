@@ -1,5 +1,4 @@
 import { RSVPData, RSVPGuest } from '@/types/guest-page-types';
-import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
 import {
   TextField,
   FormControl,

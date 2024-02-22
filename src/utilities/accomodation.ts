@@ -1,4 +1,4 @@
-import { TentCosts, TentPrices } from '@/types/guest-page-types';
+import { TentCosts, TentData, TentPrices } from '@/types/guest-page-types';
 
 export const tentCosts: TentCosts = {
   emptyTent: {
@@ -72,4 +72,13 @@ export const calculateCosts = ({
     default:
       return 0;
   }
+};
+
+export const checkBookingDataIsValid = (accomodationData: TentData) => {
+  return Boolean(
+    accomodationData.guests.length <
+      getMaxNoPeopleForTent(accomodationData.type) &&
+      accomodationData.guests.length > 0 &&
+      accomodationData.email
+  );
 };

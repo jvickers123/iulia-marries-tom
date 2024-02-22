@@ -1,20 +1,21 @@
-import { RSVPGuest, ShowPanels, TentData } from '@/types/guest-page-types';
+import { RSVPGuest, TentData } from '@/types/guest-page-types';
 import {
   TextField,
   FormControl,
   FormLabel,
   RadioGroup,
-  Checkbox,
   FormControlLabel,
   Radio,
   Button,
 } from '@mui/material';
 import {
   calculateCosts,
+  checkBookingDataIsValid,
   getMaxNoPeopleForTent,
 } from '@/utilities/accomodation';
 import AutoCompleteMultiSelect from './AutoCompleteMultiSelect';
 import { SyntheticEvent, useEffect, useState } from 'react';
+import { getGuestNamesOneString } from '@/utilities/data';
 
 const AccomodationForm = ({
   setAccomodationData,
@@ -30,6 +31,7 @@ const AccomodationForm = ({
   const [totalCost, setTotalCost] = useState(0);
   const [sendEmailToFirstGuest, setSendEmailToFirstGuest] = useState(true);
   const [showNotesAboutExtraBeds, setShowNotesAboutExtraBeds] = useState(false);
+  const [isValidBookingData, setIsValidBookingData] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
@@ -48,23 +50,28 @@ const AccomodationForm = ({
     _event: React.SyntheticEvent<Element>,
     value: RSVPGuest[]
   ) => {
-    setAccomodationData({ ...accomodationData, guests: value });
+    const tentName = getGuestNamesOneString(value);
+    setAccomodationData({ ...accomodationData, guests: value, name: tentName });
   };
 
   const handleSendEmailToRadioButton = (
     _event: SyntheticEvent<Element, Event>,
     value: string
   ) => {
-    setSendEmailToFirstGuest(value === 'first-guest');
+    const firstGuestChecked = value === 'first-guest';
+
+    setSendEmailToFirstGuest(firstGuestChecked);
   };
 
   useEffect(() => {
-    const totalCost = calculateCosts({
+    const newTotalCost = calculateCosts({
       accomodationType: accomodationData.type,
       noPeople: accomodationData.guests.length,
     });
 
-    setTotalCost(totalCost);
+    setTotalCost(newTotalCost);
+
+    setAccomodationData({ ...accomodationData, price: newTotalCost });
 
     if (
       accomodationData.type === 'luxury' &&
@@ -74,7 +81,29 @@ const AccomodationForm = ({
     } else {
       setShowNotesAboutExtraBeds(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accomodationData.guests, accomodationData.type]);
+
+  useEffect(() => {
+    if (sendEmailToFirstGuest && accomodationData.guests.length > 0) {
+      setAccomodationData({
+        ...accomodationData,
+        email: accomodationData.guests[0].email || '',
+      });
+    } else {
+      setAccomodationData({
+        ...accomodationData,
+        email: '',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accomodationData.guests, sendEmailToFirstGuest]);
+
+  useEffect(() => {
+    const isValid = checkBookingDataIsValid(accomodationData);
+
+    setIsValidBookingData(isValid);
+  }, [accomodationData]);
 
   return (
     <>
@@ -165,29 +194,28 @@ const AccomodationForm = ({
           />
         )}
 
-        <p className="booking-form__para">
+        <p className="booking-form__para booking-form__para--green">
           Booking for {accomodationData.guests.length} people
         </p>
-        <p className="booking-form__para">
+        <p className="booking-form__para booking-form__para--green">
           (Max {getMaxNoPeopleForTent(accomodationData.type)} people)
         </p>
 
-        <p className="booking-form__para">Total Cost: £{totalCost}</p>
+        <p className="booking-form__para booking-form__para--green">
+          Total Cost: £{totalCost}
+        </p>
 
         {accomodationData.guests.length >
           getMaxNoPeopleForTent(accomodationData.type) && (
-          <p className="booking-form__warning-text">
-            Booking for too many people
+          <p className="booking-form__para booking-form__para--warning-text">
+            Booking for too many people for that tent type
           </p>
         )}
 
         <Button
           type="submit"
           variant="contained"
-          disabled={
-            accomodationData.guests.length >
-            getMaxNoPeopleForTent(accomodationData.type)
-          }
+          disabled={!isValidBookingData}
           className="booking-form__submit-btn"
           size="large">
           Send
