@@ -1,5 +1,7 @@
+@import '../utils/utils';
+
 .drawer-menu {
-  &__open-btn {
+  & &__open-btn {
     position: fixed;
     top: 0;
     right: 0;
@@ -19,5 +21,14 @@
 
   &__list-item {
     color: $light-green;
+  }
+}
+
+@include respond(tablet) {
+  .drawer-menu {
+    & &__open-btn {
+      top: 1rem;
+      right: 1rem;
+    }
   }
 }
