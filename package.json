@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@mui/material": "^5.14.20",
     "axios": "^1.6.2",
     "buffer": "^6.0.3",
     "next": "14.0.3",
