@@ -8,7 +8,6 @@ import DeleteButton from './DeleteButton';
 
 const AdminTableRow = ({ guest }: { guest: Guests }) => {
   const [editing, setEditing] = useState(false);
-  console.log(guest);
 
   const { id, name, email, attending, fullDay, accomodationTents, notes } =
     guest;

@@ -115,7 +115,6 @@ Thomas and Iulia xxx
         message,
       }
     );
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -225,7 +224,7 @@ export const editAccomodation = async ({
   try {
     const token = getTokenFromLocal();
 
-    const { data } = await axios.put(
+    await axios.put(
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/accomodation/${body.id}`,
       body,
       {
@@ -234,7 +233,6 @@ export const editAccomodation = async ({
         },
       }
     );
-    console.log(data);
     setShowSuccessToast(true);
   } catch (error) {
     console.error(error);
