@@ -19,6 +19,7 @@ const DrawerMenu = ({
       <Button
         onClick={toggleDrawer({ open: true, setIsDrawerOpen })}
         className="drawer-menu__open-btn"
+        variant="contained"
         aria-label="menu">
         <Image
           src={menuSVG}
