@@ -24,12 +24,11 @@ const AccomodationInfo = ({
         <h2 className="info__heading">Accomodation</h2>
 
         <p className="info__para info__para--green">
-          Please book your for the wedding here. We have three types of glamping
-          tent for you to choose from.
+          We have three types of glamping tent for you to choose from.
         </p>
 
         <p className="info__para info__para--green">
-          The tents are being delivered on the Friday so if you are invited for
+          The tents are being delivered on the Friday so if you are invited to
           the full day, you are welcome to stay for two nights at no extra cost.
         </p>
 
@@ -50,16 +49,16 @@ const AccomodationInfo = ({
         />
 
         <p className="info__para info__para--dark-green">
-          Sleeps 2 - 6 people. You will need to bring roll mats, bedding and
+          Sleeps 1 - 6 people. You will need to bring roll mats, bedding and
           sleeping bags etc.
         </p>
 
         <p className="info__para info__para--black">
-          Cost: £{tentCosts.emptyTent.initialPrice} for 2 people.
+          £{tentCosts.emptyTent.initialPrice} for 1 person.
         </p>
 
         <p className="info__para info__para--black">
-          Cost: £{tentCosts.emptyTent.pricePerExtra} per person.
+          £{tentCosts.emptyTent.pricePerExtra} per extra person.
         </p>
 
         <p className="info__para info__para--purple info__para--large info__para--margin-top">
@@ -80,11 +79,11 @@ const AccomodationInfo = ({
         </p>
 
         <p className="info__para info__para--black">
-          Cost: £{tentCosts.partyTent.initialPrice} for 2 people.
+          £{tentCosts.partyTent.initialPrice} for 2 people.
         </p>
 
         <p className="info__para info__para--black">
-          Extra Bed: £{tentCosts.partyTent.pricePerExtra} per person.
+          £{tentCosts.partyTent.pricePerExtra} per extra person.
         </p>
 
         <p className="info__para info__para--purple info__para--large info__para--margin-top">
@@ -104,15 +103,15 @@ const AccomodationInfo = ({
         </p>
 
         <p className="info__para info__para--black">
-          Cost: £{tentCosts.luxuryTent.initialPrice} for 2 people.
+          £{tentCosts.luxuryTent.initialPrice} for 2 people.
         </p>
 
         <p className="info__para info__para--black">
-          Extra Bed: £{tentCosts.luxuryTent.pricePerExtra} per person.
+          £{tentCosts.luxuryTent.pricePerExtra} per extra person.
         </p>
 
         <p className="info__para info__para--green info__para--margin-top">
-          Once you have chosen your tent, please book here and you will reveive
+          Once you have chosen your tent, please book here and you will receive
           an email with details of how to make a payment.
         </p>
 

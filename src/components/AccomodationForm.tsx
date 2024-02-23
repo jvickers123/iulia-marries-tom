@@ -195,7 +195,8 @@ const AccomodationForm = ({
         )}
 
         <p className="booking-form__para booking-form__para--green">
-          Booking for {accomodationData.guests.length} people
+          Booking for {accomodationData.guests.length}{' '}
+          {accomodationData.guests.length === 1 ? 'person' : 'people'}
         </p>
         <p className="booking-form__para booking-form__para--green">
           (Max {getMaxNoPeopleForTent(accomodationData.type)} people)

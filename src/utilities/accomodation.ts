@@ -2,8 +2,8 @@ import { TentCosts, TentData, TentPrices } from '@/types/guest-page-types';
 
 export const tentCosts: TentCosts = {
   emptyTent: {
-    initialPrice: 199,
-    minPeople: 2,
+    initialPrice: 179,
+    minPeople: 1,
     maxPeople: 6,
     pricePerExtra: 19,
   },
@@ -51,7 +51,7 @@ export const returnCostPerTent = ({
     return initialPrice + (maxPeople - minPeople) * pricePerExtra;
   }
 
-  return initialPrice + (noPeople - 2) * pricePerExtra;
+  return initialPrice + (noPeople - minPeople) * pricePerExtra;
 };
 
 export const calculateCosts = ({
