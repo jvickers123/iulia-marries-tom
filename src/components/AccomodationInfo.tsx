@@ -115,6 +115,10 @@ const AccomodationInfo = ({
           an email with details of how to make a payment.
         </p>
 
+        <p className="info__para info__para--green info__para--margin-top">
+          Please make all bookings by 31/04/24
+        </p>
+
         <Button
           variant="contained"
           className="info__button"
