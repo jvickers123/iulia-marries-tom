@@ -24,8 +24,17 @@ const AccomodationInfo = ({
         <h2 className="info__heading">Accomodation</h2>
 
         <p className="info__para info__para--green">
-          You can book accomodation for the wedding here. There are 3 types of
-          tents to choose from.
+          Please book your for the wedding here. We have three types of glamping
+          tent for you to choose from.
+        </p>
+
+        <p className="info__para info__para--green">
+          The tents are being delivered on the Friday so if you are invited for
+          the full day, you are welcome to stay for two nights at no extra cost.
+        </p>
+
+        <p className="info__para info__para--green">
+          There will be toilets and nice warm showers available on the site.
         </p>
 
         <p className="info__para info__para--purple info__para--large info__para--margin-top">
@@ -41,12 +50,16 @@ const AccomodationInfo = ({
         />
 
         <p className="info__para info__para--dark-green">
-          Sleeps 1 - 6 people. All ready for you to move into. You will need to
-          bring roll mats, bedding and sleeping bags etc.
+          Sleeps 2 - 6 people. You will need to bring roll mats, bedding and
+          sleeping bags etc.
         </p>
 
         <p className="info__para info__para--black">
-          Cost: £{tentCosts.emptyTent.initialPrice} for 1 - 6 people.
+          Cost: £{tentCosts.emptyTent.initialPrice} for 2 people.
+        </p>
+
+        <p className="info__para info__para--black">
+          Cost: £{tentCosts.emptyTent.pricePerExtra} per person.
         </p>
 
         <p className="info__para info__para--purple info__para--large info__para--margin-top">
@@ -99,8 +112,8 @@ const AccomodationInfo = ({
         </p>
 
         <p className="info__para info__para--green info__para--margin-top">
-          Once you have chosen, you can book it here and you will recieve an
-          email about how to pay for it.
+          Once you have chosen your tent, please book here and you will reveive
+          an email with details of how to make a payment.
         </p>
 
         <Button

@@ -2,22 +2,22 @@ import { TentCosts, TentData, TentPrices } from '@/types/guest-page-types';
 
 export const tentCosts: TentCosts = {
   emptyTent: {
-    initialPrice: 159,
-    minPeople: 1,
-    maxPeople: 6,
-    pricePerExtra: 0,
-  },
-  partyTent: {
     initialPrice: 199,
     minPeople: 2,
     maxPeople: 6,
-    pricePerExtra: 28,
+    pricePerExtra: 19,
+  },
+  partyTent: {
+    initialPrice: 239,
+    minPeople: 2,
+    maxPeople: 6,
+    pricePerExtra: 49,
   },
   luxuryTent: {
-    initialPrice: 299,
+    initialPrice: 339,
     minPeople: 2,
     maxPeople: 4,
-    pricePerExtra: 50,
+    pricePerExtra: 69,
   },
 };
 
@@ -76,7 +76,7 @@ export const calculateCosts = ({
 
 export const checkBookingDataIsValid = (accomodationData: TentData) => {
   return Boolean(
-    accomodationData.guests.length <
+    accomodationData.guests.length <=
       getMaxNoPeopleForTent(accomodationData.type) &&
       accomodationData.guests.length > 0 &&
       accomodationData.email
