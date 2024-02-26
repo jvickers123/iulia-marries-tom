@@ -35,9 +35,12 @@ const SuccessBooking = ({
       <p className="success-rsvp__paragraph">Total cost: £{booking.price}</p>
 
       <p className="success-rsvp__paragraph success-rsvp__paragraph--black">
-        You should have recieved an email with instructions on how to pay for
-        it. Please check your spam folder as it will almost certainly be in
-        there
+        You should have recieved an email from{' '}
+        <span className="success-rsvp__paragraph--helvetica-font">
+          {process.env.NEXT_PUBLIC_SENT_EMAIL}
+        </span>{' '}
+        with instructions on how to pay for it. Please check your spam folder as
+        it will almost certainly be in there
       </p>
 
       <Button variant="contained" color="secondary" onClick={handleClick}>
