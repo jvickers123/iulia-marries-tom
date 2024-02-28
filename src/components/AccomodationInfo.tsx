@@ -115,8 +115,15 @@ const AccomodationInfo = ({
           an email with details of how to make a payment.
         </p>
 
-        <p className="info__para info__para--green info__para--margin-top">
+        <p className="info__para info__para--green">
           Please make all bookings by 31/04/24
+        </p>
+
+        <p className="info__para info__para--green">
+          If you have any questions please contact{' '}
+          <span className="info__para--green success-rsvp__paragraph--helvetica-font">
+            {process.env.NEXT_PUBLIC_INFO_EMAIL}
+          </span>
         </p>
 
         <Button
