@@ -14,7 +14,7 @@ import {
   getMaxNoPeopleForTent,
 } from '@/utilities/accomodation';
 import AutoCompleteMultiSelect from './AutoCompleteMultiSelect';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, use, useEffect, useState } from 'react';
 import { getGuestNamesOneString } from '@/utilities/data';
 
 const AccomodationForm = ({
@@ -71,8 +71,6 @@ const AccomodationForm = ({
 
     setTotalCost(newTotalCost);
 
-    setAccomodationData({ ...accomodationData, price: newTotalCost });
-
     if (
       accomodationData.type === 'luxury' &&
       accomodationData.guests.length >= 4
@@ -81,7 +79,6 @@ const AccomodationForm = ({
     } else {
       setShowNotesAboutExtraBeds(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accomodationData.guests, accomodationData.type]);
 
   useEffect(() => {
@@ -104,6 +101,12 @@ const AccomodationForm = ({
 
     setIsValidBookingData(isValid);
   }, [accomodationData]);
+
+  useEffect(() => {
+    setAccomodationData({ ...accomodationData, price: totalCost });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalCost])
 
   return (
     <>
