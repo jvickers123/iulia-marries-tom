@@ -10,6 +10,9 @@ export type Guests = {
   attending?: 'yes' | 'no' | 'maybe' | 'not-responded';
   price?: string;
   fullDay?: boolean;
+  lunch?: 'lamb' | 'salmon' | 'veggie' | 'vegan' | 'none';
+  hotdog?: 'classic' | 'fish' | 'halloumi' | 'tofu' | 'none';
+  dietryRequirements?: string;
   notes?: string;
 };
 

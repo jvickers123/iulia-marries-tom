@@ -9,8 +9,18 @@ import DeleteButton from './DeleteButton';
 const AdminTableRow = ({ guest }: { guest: Guests }) => {
   const [editing, setEditing] = useState(false);
 
-  const { id, name, email, attending, fullDay, accomodationTents, notes } =
-    guest;
+  const {
+    id,
+    name,
+    email,
+    attending,
+    fullDay,
+    accomodationTents,
+    hotdog,
+    lunch,
+    dietryRequirements,
+    notes,
+  } = guest;
 
   return (
     <>
@@ -31,6 +41,9 @@ const AdminTableRow = ({ guest }: { guest: Guests }) => {
               : 'Not paid'
             : ''}
         </TableCell>
+        <TableCell>{lunch}</TableCell>
+        <TableCell>{hotdog}</TableCell>
+        <TableCell>{dietryRequirements}</TableCell>
         <TableCell>{notes}</TableCell>
         <TableCell>
           <EditButton setEditing={setEditing} />

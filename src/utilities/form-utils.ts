@@ -28,6 +28,9 @@ export const emptyGuest: Guests = {
   price: '',
   fullDay: false,
   notes: '',
+  dietryRequirements: '',
+  hotdog: 'none',
+  lunch: 'none',
 };
 
 export const emptyAccomodation: TentForm = {

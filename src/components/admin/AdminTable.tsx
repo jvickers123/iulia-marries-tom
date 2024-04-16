@@ -27,6 +27,9 @@ const AdminTable = ({ guests }: { guests: Guests[] }) => {
               <TableCell>Full Day?</TableCell>
               <TableCell>Accomodation</TableCell>
               <TableCell>Paid</TableCell>
+              <TableCell>Lunch BBQ</TableCell>
+              <TableCell>Hotdog</TableCell>
+              <TableCell>Dietry Requirements</TableCell>
               <TableCell>Notes</TableCell>
               <TableCell>Edit</TableCell>
               <TableCell>Delete</TableCell>

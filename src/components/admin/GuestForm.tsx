@@ -36,6 +36,26 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
     });
   };
 
+  const handleRadioChangeLunch = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      lunch: value as 'lamb' | 'salmon' | 'veggie' | 'vegan' | 'none',
+    });
+  };
+
+  const handleRadioChangeHotdog = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    setFormData({
+      ...formData,
+      hotdog: value as 'classic' | 'fish' | 'halloumi' | 'tofu' | 'none',
+    });
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     updateOrAddGuest({
@@ -148,16 +168,70 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
               />
             </RadioGroup>
           </FormControl>
+          <FormControl className="edit-form__input">
+            <FormLabel id="lunch-label">Lunch BBQ option?</FormLabel>
+            <RadioGroup
+              aria-labelledby="lunch-label"
+              defaultValue={formData.lunch}
+              value={formData.lunch}
+              name="radio-buttons-group-lunch"
+              row
+              id="lunch"
+              onChange={handleRadioChangeLunch}>
+              <FormControlLabel value="lamb" control={<Radio />} label="Lamb" />
+              <FormControlLabel
+                value="salmon"
+                control={<Radio />}
+                label="Salmon"
+              />
+              <FormControlLabel
+                value="Veggie"
+                control={<Radio />}
+                label="Veggie"
+              />
+              <FormControlLabel
+                value="Vegan"
+                control={<Radio />}
+                label="Vegan"
+              />
+              <FormControlLabel value="none" control={<Radio />} label="None" />
+            </RadioGroup>
+          </FormControl>
+          <FormControl className="edit-form__input">
+            <FormLabel id="hotdog-label">Hotdog option?</FormLabel>
+            <RadioGroup
+              aria-labelledby="hotdog-label"
+              defaultValue={formData.hotdog}
+              value={formData.hotdog}
+              name="radio-buttons-group-hotdog"
+              row
+              id="hotdog"
+              onChange={handleRadioChangeHotdog}>
+              <FormControlLabel
+                value="classic"
+                control={<Radio />}
+                label="Classic"
+              />
+              <FormControlLabel value="fish" control={<Radio />} label="Fish" />
+              <FormControlLabel
+                value="halloumi"
+                control={<Radio />}
+                label="Haloumi"
+              />
+              <FormControlLabel value="tofu" control={<Radio />} label="Tofu" />
+              <FormControlLabel value="none" control={<Radio />} label="None" />
+            </RadioGroup>
+          </FormControl>
         </div>
         <div className="edit-form__flex-container">
           <TextField
             onChange={handleChange}
-            value={formData.accomodation}
+            value={formData.dietryRequirements}
             className="edit-form__input"
-            id="accomodation"
-            label="Accomodation"
-            multiline
+            id="dietryRequirements"
+            label="Dietry Requirements"
             variant="standard"
+            multiline
             type="text"
           />
           <TextField
