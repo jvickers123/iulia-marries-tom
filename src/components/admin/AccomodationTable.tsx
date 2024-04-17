@@ -21,13 +21,21 @@ const AccomodationTable = ({ tents }: { tents: Tent[] }) => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Guests</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Paid</TableCell>
-              <TableCell>Notes</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Guests
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">Type</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Price
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">Paid</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Notes
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">Edit</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Delete
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -37,7 +45,9 @@ const AccomodationTable = ({ tents }: { tents: Tent[] }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      {showEditing && <EditModal editing={showEditing} setEditing={setShowEditing} />}
+      {showEditing && (
+        <EditModal editing={showEditing} setEditing={setShowEditing} />
+      )}
     </>
   );
 };

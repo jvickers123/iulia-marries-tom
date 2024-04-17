@@ -34,3 +34,14 @@ export type Tent = TentBase & {
 export type TentForm = TentBase & {
   guests: string[];
 };
+
+export type FoodTotals = {
+  lamb: number;
+  salmon: number;
+  veggie: number;
+  vegan: number;
+  classic: number;
+  fish: number;
+  halloumi: number;
+  tofu: number;
+}

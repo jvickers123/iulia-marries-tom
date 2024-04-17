@@ -1,4 +1,4 @@
-import { Guests, TentForm } from '@/types/admin-types';
+import { FoodTotals, Guests, TentForm } from '@/types/admin-types';
 import { RSVPData, RSVPGuest, TentData } from '@/types/guest-page-types';
 import { fetchGuests } from './api-utils';
 import { tentCosts } from './accomodation';
@@ -59,3 +59,31 @@ export const getPeopleInfoFromAPI = async () => {
     console.log(error);
   }
 };
+
+export const getTotalFood = (guests: Guests[]) => {
+  const food = guests.reduce(
+    (acc, guest) => {
+      if (guest.lunch === 'lamb') acc.lamb += 1;
+      if (guest.lunch === 'salmon') acc.salmon += 1;
+      if (guest.lunch === 'veggie') acc.veggie += 1;
+      if (guest.lunch === 'vegan') acc.vegan += 1;
+      if (guest.hotdog === 'classic') acc.classic += 1;
+      if (guest.hotdog === 'fish') acc.fish += 1;
+      if (guest.hotdog === 'halloumi') acc.halloumi += 1;
+      if (guest.hotdog === 'tofu') acc.tofu += 1;
+      return acc;
+    },
+    {
+      lamb: 0,
+      salmon: 0,
+      veggie: 0,
+      vegan: 0,
+      classic: 0,
+      fish: 0,
+      halloumi: 0,
+      tofu: 0,
+    }
+  );
+
+  return food as FoodTotals;
+}

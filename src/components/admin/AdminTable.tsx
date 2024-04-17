@@ -10,29 +10,50 @@ import { Guests } from '@/types/admin-types';
 import AdminTableRow from './AdminTableRow';
 import AddGuestButton from './AddGuestButton';
 import AddGuest from './AddGuest';
+import TotalFoodTable from './TotalFood';
 
 const AdminTable = ({ guests }: { guests: Guests[] }) => {
   const [showAddGuestForm, setShowAddGuestForm] = useState(false);
 
   return (
     <>
-      <h2>Guests</h2>
+      <h2 className="admin-table__heading">Guests</h2>
+      <h3>Food Totals:</h3>
+      <TotalFoodTable guests={guests} />
       <TableContainer component={Paper} className="rsvp-table">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Attending?</TableCell>
-              <TableCell>Full Day?</TableCell>
-              <TableCell>Accomodation</TableCell>
-              <TableCell>Paid</TableCell>
-              <TableCell>Lunch BBQ</TableCell>
-              <TableCell>Hotdog</TableCell>
-              <TableCell>Dietry Requirements</TableCell>
-              <TableCell>Notes</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell className="admin-table__cell--heading">Name</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Email
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Attending?
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Full Day?
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Accomodation
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">Paid</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Lunch BBQ
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Hotdog
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Dietry Requirements
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Notes
+              </TableCell>
+              <TableCell className="admin-table__cell--heading">Edit</TableCell>
+              <TableCell className="admin-table__cell--heading">
+                Delete
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
