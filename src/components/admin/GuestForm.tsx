@@ -12,7 +12,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { emptyGuest } from '@/utilities/form-utils';
 import LoadingSpinner from '../LoadingSpinner';
 import { updateOrAddGuest } from '@/utilities/api-utils';
-import Success from './Success';
+import SuccessToast from '../SuccessToast';
 
 const GuestForm = ({ guest }: { guest?: Guests }) => {
   const [formData, setFormData] = useState(emptyGuest);
@@ -249,7 +249,7 @@ const GuestForm = ({ guest }: { guest?: Guests }) => {
           {guest ? 'Update' : 'Add Guest'}
         </Button>
         {loading && <LoadingSpinner />}
-        {showSuccessToast && <Success />}
+        {showSuccessToast && <SuccessToast />}
 
         {error && (
           <p className="login__error">Something went wrong, please try again</p>

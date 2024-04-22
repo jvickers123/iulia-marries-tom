@@ -11,7 +11,7 @@ import {
 import { FormEvent, useEffect, useState } from 'react';
 import { emptyAccomodation } from '@/utilities/form-utils';
 import LoadingSpinner from '../LoadingSpinner';
-import Success from './Success';
+import SuccessToast from '../SuccessToast';
 import { getGuestNamesOneString } from '@/utilities/data';
 import AutoCompleteMultiSelect from '../AutoCompleteMultiSelect';
 import { RSVPGuest } from '@/types/guest-page-types';
@@ -170,7 +170,7 @@ const AccomodationForm = ({ tent }: { tent: Tent }) => {
           Update
         </Button>
         {loading && <LoadingSpinner />}
-        {showSuccessToast && <Success />}
+        {showSuccessToast && <SuccessToast />}
 
         {error && (
           <p className="login__error">Something went wrong, please try again</p>

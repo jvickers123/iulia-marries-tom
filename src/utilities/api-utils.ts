@@ -108,15 +108,54 @@ Thanks and looking forward to seeing you there,
 Thomas and Iulia xxx
   `;
   try {
-    const { data } = await axios.post(
-      `${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`,
-      {
-        email: booking.email,
-        message,
-      }
-    );
+    await axios.post(`${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`, {
+      email: booking.email,
+      message,
+    });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const sendGiftEmail = async ({
+  setError,
+  setSuccess,
+  setLoading,
+  email,
+}: {
+  setSuccess: Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  email: string;
+}) => {
+  const message = `Hi,
+
+Thank you for offering to send a gift! We are really grateful for any contribution.
+
+We are planning to go on a honeymoon and to renovate our house in the future so any contribution towards either of these would be very much appreciated.
+
+In order to pay please send a bank transfer to:
+
+Account Name: ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+Sort Code: ${process.env.NEXT_PUBLIC_SORT_CODE}
+Account Number: ${process.env.NEXT_PUBLIC_ACCOUNT_NUMBER}
+
+Thanks and looking forward to seeing you at the wedding,
+
+Thomas and Iulia xxx
+  `;
+  try {
+    setLoading(true);
+    await axios.post(`${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`, {
+      email,
+      message,
+    });
+    setSuccess(true);
+  } catch (error) {
+    console.log(error);
+    setError(true);
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -259,7 +298,7 @@ export const addGuest = async ({
   try {
     const token = getTokenFromLocal();
 
-    const { data } = await axios.post(
+    await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/`,
       body,
       {

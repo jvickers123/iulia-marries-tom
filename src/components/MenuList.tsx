@@ -53,6 +53,12 @@ const MenuList = ({
         </ListItem>
         <ListItem className="drawer-menu__list-item">
           <ListItemButton
+            onClick={() => setShowPanels(prev => ({ ...prev, gift: true }))}>
+            <ListItemText primary="Gifts" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem className="drawer-menu__list-item">
+          <ListItemButton
             onClick={() => setShowPanels(prev => ({ ...prev, rsvp: true }))}>
             <ListItemText primary="RSVP" />
           </ListItemButton>

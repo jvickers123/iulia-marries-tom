@@ -5,4 +5,5 @@ export const emptyShowPanels: ShowPanels = {
   accomodationInfo: false,
   bookAccomodation: false,
   rsvp: false,
+  gift: false,
 };

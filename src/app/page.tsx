@@ -13,6 +13,7 @@ import Info from '@/components/Info';
 import AccomodationInfo from '@/components/AccomodationInfo';
 import BookAccomodationModal from '@/components/BookAccomodationModal';
 import RsvpModal from '@/components/RsvpModal';
+import Gifts from '@/components/Gifts';
 
 export default function Home() {
   const [showPanels, setShowPanels] = useState(emptyShowPanels);
@@ -30,6 +31,10 @@ export default function Home() {
               setShowPanels(prev => ({ ...prev, generalInfo: false }))
             }
             showMoreInfo={showPanels.generalInfo}
+          />
+          <Gifts
+            closeModal={() => setShowPanels(prev => ({ ...prev, gift: false }))}
+            showGifts={showPanels.gift}
           />
           <AccomodationInfo
             closeModal={() =>

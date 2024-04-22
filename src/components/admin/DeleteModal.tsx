@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { deleteGuest } from '@/utilities/api-utils';
 import { useState } from 'react';
 import LoadingSpinner from '../LoadingSpinner';
-import Success from './Success';
+import SuccessToast from '../SuccessToast';
 
 const DeleteModal = ({
   guestId,
@@ -61,7 +61,7 @@ const DeleteModal = ({
               Something went wrong. Please try again later
             </p>
           )}
-          {showSuccessToast && <Success />}
+          {showSuccessToast && <SuccessToast />}
         </form>
       </ModalContentContainer>
     </Modal>

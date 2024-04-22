@@ -18,3 +18,7 @@ export const userAuth = () => {
   const currentTime = Math.round(Date.now() / 1000);
   return currentTime < payload.exp;
 };
+
+export const checkIfValidEmail = (email: string) => {
+  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+};
