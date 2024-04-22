@@ -22,6 +22,7 @@ export type ShowPanels = {
   generalInfo: boolean;
   accomodationInfo: boolean;
   bookAccomodation: boolean;
+  rsvp: boolean;
 };
 
 export type TentPrices = {

@@ -1,13 +1,17 @@
 import Image from 'next/image';
-import RSVPButton from './RSVPButton';
-import { useState } from 'react';
+import ShowGeneralInfoSign from './ShowGeneralInfoSign';
 import RsvpModal from './RsvpModal';
+import { ShowPanels } from '@/types/guest-page-types';
 const titleSrc = '/assets/laptop-sign.png';
 const titleAlt = 'Iulia marries Tom';
 const titleSignImageClassName = 'titleSign__image';
-const TitleSign = () => {
-  const [showRSVP, setShowRSVP] = useState(false);
-
+const TitleSign = ({
+  showPanels,
+  setShowPanels,
+}: {
+  showPanels: ShowPanels;
+  setShowPanels: React.Dispatch<React.SetStateAction<ShowPanels>>;
+}) => {
   return (
     <>
       <div className="titleSign">
@@ -33,7 +37,7 @@ const TitleSign = () => {
             />
           </span>
         </div>
-        <RSVPButton setShowRSVP={setShowRSVP} />
+        <ShowGeneralInfoSign setShowPanels={setShowPanels} />
         <span className="titleSign__title--mobile">
           <Image
             src="/assets/extra-pole.png"
@@ -55,7 +59,6 @@ const TitleSign = () => {
           />
         </span>
       </div>
-      <RsvpModal closeModal={() => setShowRSVP(false)} showRSVP={showRSVP} />
     </>
   );
 };

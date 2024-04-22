@@ -51,6 +51,12 @@ const MenuList = ({
             <ListItemText primary="General Info" />
           </ListItemButton>
         </ListItem>
+        <ListItem className="drawer-menu__list-item">
+          <ListItemButton
+            onClick={() => setShowPanels(prev => ({ ...prev, rsvp: true }))}>
+            <ListItemText primary="RSVP" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );

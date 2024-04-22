@@ -12,6 +12,7 @@ import { emptyShowPanels } from '@/utilities/ui';
 import Info from '@/components/Info';
 import AccomodationInfo from '@/components/AccomodationInfo';
 import BookAccomodationModal from '@/components/BookAccomodationModal';
+import RsvpModal from '@/components/RsvpModal';
 
 export default function Home() {
   const [showPanels, setShowPanels] = useState(emptyShowPanels);
@@ -23,7 +24,7 @@ export default function Home() {
       <ThemeProvider theme={theme}>
         <DrawerMenu setShowPanels={setShowPanels} />
         <main className="main">
-          <TitleSign />
+          <TitleSign showPanels={showPanels} setShowPanels={setShowPanels} />
           <Info
             closeModal={() =>
               setShowPanels(prev => ({ ...prev, generalInfo: false }))
@@ -54,6 +55,15 @@ export default function Home() {
               }))
             }
             showModal={showPanels.bookAccomodation}
+          />
+          <RsvpModal
+            closeModal={() =>
+              setShowPanels(prev => ({
+                ...prev,
+                rsvp: false,
+              }))
+            }
+            showRSVP={showPanels.rsvp}
           />
         </main>
       </ThemeProvider>
