@@ -27,7 +27,7 @@ const Info = ({
 
       <p className="info__para info__para--black info__para--margin-top">
         Click on RSVP to let us know if you can make it. And you can book
-        accomodation on here too.
+        accomodation and food on here too.
       </p>
     </ModalContentContainer>
   </Modal>

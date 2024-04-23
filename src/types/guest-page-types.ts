@@ -1,3 +1,5 @@
+import { Guests } from './admin-types';
+
 export type RSVPData = {
   email: string;
   attending: 'yes' | 'no' | 'maybe';
@@ -24,6 +26,10 @@ export type ShowPanels = {
   bookAccomodation: boolean;
   rsvp: boolean;
   gift: boolean;
+  foodInfo: boolean;
+  orderFood: boolean;
+  contact: boolean;
+  timings: boolean;
 };
 
 export type TentPrices = {
@@ -48,3 +54,16 @@ export type TentData = {
   price: number;
   name: string;
 };
+
+export type FoodOptions = {
+  lunch: LunchOptions;
+  hotdog: HotdogOptions;
+  dietryRequirements?: string;
+};
+
+export type FoodOrder = FoodOptions & {
+  guestId: string;
+};
+
+export type LunchOptions = 'lamb' | 'salmon' | 'veggie' | 'vegan' | 'none';
+export type HotdogOptions = 'classic' | 'fish' | 'halloumi' | 'tofu' | 'none';

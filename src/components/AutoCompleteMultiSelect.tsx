@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
 import { RSVPGuest } from '@/types/guest-page-types';
 import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
-import { create } from 'domain';
 
 const AutoCompleteMultiSelect = ({
   onChange,

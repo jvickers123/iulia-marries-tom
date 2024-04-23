@@ -9,11 +9,13 @@ import { ShowPanels } from '@/types/guest-page-types';
 
 const DrawerMenu = ({
   setShowPanels,
+  isDrawerOpen,
+  setIsDrawerOpen,
 }: {
   setShowPanels: Dispatch<SetStateAction<ShowPanels>>;
+  isDrawerOpen: boolean;
+  setIsDrawerOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
   return (
     <div className="drawer-menu">
       <Button

@@ -1,16 +1,17 @@
 import { ShowPanels } from '@/types/guest-page-types';
+import { toggleDrawer } from '@/utilities/drawer';
 import Image from 'next/image';
 
-const SetShowGeneralInfo = ({
-  setShowPanels,
+const MoreInfoRoadSign = ({
+  setIsDrawerOpen,
 }: {
-  setShowPanels: React.Dispatch<React.SetStateAction<ShowPanels>>;
+  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <>
       <button
         className="RSVP-button"
-        onClick={() => setShowPanels(prev => ({ ...prev, generalInfo: true }))}>
+        onClick={toggleDrawer({ open: true, setIsDrawerOpen })}>
         <span className="RSVP-button--mobile">
           <Image
             src="/assets/more-info-road-sign.png"
@@ -32,4 +33,4 @@ const SetShowGeneralInfo = ({
   );
 };
 
-export default SetShowGeneralInfo;
+export default MoreInfoRoadSign;

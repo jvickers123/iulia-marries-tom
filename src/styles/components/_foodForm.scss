@@ -1,0 +1,27 @@
+.food-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+
+  &__guest-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    border: 1px solid $light-green;
+    border-radius: 5px;
+  }
+
+  &__option-flex-container {
+    display: flex;
+    gap: 2rem;
+
+    > * {
+      flex: 1;
+    }
+  }
+}

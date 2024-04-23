@@ -130,17 +130,13 @@ export const sendGiftEmail = async ({
 }) => {
   const message = `Hi,
 
-Thank you for offering to send a gift! We are really grateful for any contribution.
-
-We are planning to go on a honeymoon and to renovate our house in the future so any contribution towards either of these would be very much appreciated.
-
-In order to pay please send a bank transfer to:
+If you would like to give a cash gift please use these bank details to make the payment:
 
 Account Name: ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}
 Sort Code: ${process.env.NEXT_PUBLIC_SORT_CODE}
 Account Number: ${process.env.NEXT_PUBLIC_ACCOUNT_NUMBER}
 
-Thanks and looking forward to seeing you at the wedding,
+Thank you and warmest wishes,
 
 Thomas and Iulia xxx
   `;

@@ -14,18 +14,27 @@ import AccomodationInfo from '@/components/AccomodationInfo';
 import BookAccomodationModal from '@/components/BookAccomodationModal';
 import RsvpModal from '@/components/RsvpModal';
 import Gifts from '@/components/Gifts';
+import FoodInfo from '@/components/FoodInfo';
+import ContactUs from '@/components/ContactUs';
+import Timings from '@/components/Timings';
+import OrderFoodModal from '@/components/OrderFoodModal';
 
 export default function Home() {
   const [showPanels, setShowPanels] = useState(emptyShowPanels);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <>
       <Background />
       <Flowers />
       <ThemeProvider theme={theme}>
-        <DrawerMenu setShowPanels={setShowPanels} />
+        <DrawerMenu
+          setShowPanels={setShowPanels}
+          isDrawerOpen={isDrawerOpen}
+          setIsDrawerOpen={setIsDrawerOpen}
+        />
         <main className="main">
-          <TitleSign showPanels={showPanels} setShowPanels={setShowPanels} />
+          <TitleSign setIsDrawerOpen={setIsDrawerOpen} />
           <Info
             closeModal={() =>
               setShowPanels(prev => ({ ...prev, generalInfo: false }))
@@ -35,6 +44,29 @@ export default function Home() {
           <Gifts
             closeModal={() => setShowPanels(prev => ({ ...prev, gift: false }))}
             showGifts={showPanels.gift}
+          />
+          <FoodInfo
+            closeModal={() =>
+              setShowPanels(prev => ({ ...prev, foodInfo: false }))
+            }
+            openOrderFood={() =>
+              setShowPanels(prev => ({ ...prev, orderFood: true }))
+            }
+            showFoodInfo={showPanels.foodInfo}
+          />
+
+          <OrderFoodModal
+            closeModal={() =>
+              setShowPanels(prev => ({ ...prev, orderFood: false }))
+            }
+            showModal={showPanels.orderFood}
+            openFoodInfo={() =>
+              setShowPanels(prev => ({
+                ...prev,
+                foodInfo: true,
+                orderFood: false,
+              }))
+            }
           />
           <AccomodationInfo
             closeModal={() =>
@@ -69,6 +101,26 @@ export default function Home() {
               }))
             }
             showRSVP={showPanels.rsvp}
+          />
+
+          <Timings
+            closeModal={() =>
+              setShowPanels(prev => ({
+                ...prev,
+                timings: false,
+              }))
+            }
+            showTimings={showPanels.timings}
+          />
+
+          <ContactUs
+            closeModal={() =>
+              setShowPanels(prev => ({
+                ...prev,
+                contact: false,
+              }))
+            }
+            showContactUs={showPanels.contact}
           />
         </main>
       </ThemeProvider>

@@ -1,16 +1,14 @@
 import Image from 'next/image';
-import ShowGeneralInfoSign from './ShowGeneralInfoSign';
+import MoreInfoRoadSign from './MoreInfoRoadSign';
 import RsvpModal from './RsvpModal';
 import { ShowPanels } from '@/types/guest-page-types';
 const titleSrc = '/assets/laptop-sign.png';
 const titleAlt = 'Iulia marries Tom';
 const titleSignImageClassName = 'titleSign__image';
 const TitleSign = ({
-  showPanels,
-  setShowPanels,
+  setIsDrawerOpen,
 }: {
-  showPanels: ShowPanels;
-  setShowPanels: React.Dispatch<React.SetStateAction<ShowPanels>>;
+  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <>
@@ -37,7 +35,7 @@ const TitleSign = ({
             />
           </span>
         </div>
-        <ShowGeneralInfoSign setShowPanels={setShowPanels} />
+        <MoreInfoRoadSign setIsDrawerOpen={setIsDrawerOpen} />
         <span className="titleSign__title--mobile">
           <Image
             src="/assets/extra-pole.png"

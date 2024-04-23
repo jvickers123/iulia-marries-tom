@@ -25,6 +25,17 @@ const MenuList = ({
       <h2 className="drawer-menu__list-heading">Menu</h2>
       <List>
         <ListItem className="drawer-menu__list-item">
+          <ListItemButton
+            onClick={() =>
+              setShowPanels(prev => ({ ...prev, generalInfo: true }))
+            }>
+            <ListItemText primary="General Info" />
+          </ListItemButton>
+        </ListItem>
+
+        <Divider />
+
+        <ListItem className="drawer-menu__list-item">
           <ListItemButton>
             <ListItemText
               primary="Accomodation Info"
@@ -34,6 +45,7 @@ const MenuList = ({
             />
           </ListItemButton>
         </ListItem>
+
         <ListItem className="drawer-menu__list-item">
           <ListItemButton
             onClick={() =>
@@ -42,25 +54,52 @@ const MenuList = ({
             <ListItemText primary="Book Accomodation" />
           </ListItemButton>
         </ListItem>
-        <Divider />
+
         <ListItem className="drawer-menu__list-item">
           <ListItemButton
             onClick={() =>
-              setShowPanels(prev => ({ ...prev, generalInfo: true }))
+              setShowPanels(prev => ({ ...prev, foodInfo: true }))
             }>
-            <ListItemText primary="General Info" />
+            <ListItemText primary="Food Info" />
           </ListItemButton>
         </ListItem>
+
+        <ListItem className="drawer-menu__list-item">
+          <ListItemButton
+            onClick={() =>
+              setShowPanels(prev => ({ ...prev, orderFood: true }))
+            }>
+            <ListItemText primary="Order Food" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem className="drawer-menu__list-item">
+          <ListItemButton
+            onClick={() => setShowPanels(prev => ({ ...prev, rsvp: true }))}>
+            <ListItemText primary="RSVP" />
+          </ListItemButton>
+        </ListItem>
+
+        <Divider />
+
+        <ListItem className="drawer-menu__list-item">
+          <ListItemButton
+            onClick={() => setShowPanels(prev => ({ ...prev, timings: true }))}>
+            <ListItemText primary="Timings" />
+          </ListItemButton>
+        </ListItem>
+
         <ListItem className="drawer-menu__list-item">
           <ListItemButton
             onClick={() => setShowPanels(prev => ({ ...prev, gift: true }))}>
             <ListItemText primary="Gifts" />
           </ListItemButton>
         </ListItem>
+
         <ListItem className="drawer-menu__list-item">
           <ListItemButton
-            onClick={() => setShowPanels(prev => ({ ...prev, rsvp: true }))}>
-            <ListItemText primary="RSVP" />
+            onClick={() => setShowPanels(prev => ({ ...prev, contact: true }))}>
+            <ListItemText primary="Contact" />
           </ListItemButton>
         </ListItem>
       </List>

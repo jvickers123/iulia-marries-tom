@@ -6,4 +6,8 @@ export const emptyShowPanels: ShowPanels = {
   bookAccomodation: false,
   rsvp: false,
   gift: false,
+  foodInfo: false,
+  orderFood: false,
+  contact: false,
+  timings: false,
 };
