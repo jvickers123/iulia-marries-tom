@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+  useState,
+} from 'react';
 import {
   Autocomplete,
   FormControl,
@@ -6,8 +12,11 @@ import {
   MenuItem,
   TextField,
   Select,
+  Paper,
+  SelectChangeEvent,
+  FormHelperText,
+  Button,
 } from '@mui/material';
-import { emptyFoodOption } from '@/utilities/food';
 import {
   FoodOrder,
   HotdogOptions,
@@ -18,19 +27,64 @@ import { Guests } from '@/types/admin-types';
 const FoodForm = ({
   guests,
   setFormData,
+  orderData,
+  orderIndex,
 }: {
   guests: Guests[];
   setFormData: Dispatch<SetStateAction<FoodOrder[]>>;
+  orderData: FoodOrder;
+  orderIndex: number;
 }) => {
-  const [foodOption, setFoodOption] = useState(emptyFoodOption);
+  const handleChange = (
+    event:
+      | SelectChangeEvent<string>
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData(prev => {
+      const clone = JSON.parse(JSON.stringify(prev));
+
+      clone[orderIndex] = {
+        ...clone[orderIndex],
+        [event.target.name]: event.target.value as LunchOptions | HotdogOptions,
+      };
+
+      return clone;
+    });
+  };
+
+  const handleAutocompleteChange = (
+    _event: SyntheticEvent<Element, Event>,
+    value: Guests | null
+  ) => {
+    setFormData(prev => {
+      const clone = JSON.parse(JSON.stringify(prev));
+
+      clone[orderIndex] = {
+        ...clone[orderIndex],
+        guestId: value?.id,
+        fullDay: value?.fullDay,
+      };
+
+      return clone;
+    });
+  };
+
+  const removeOrder = () => {
+    setFormData(prev => {
+      const clone = JSON.parse(JSON.stringify(prev)) as FoodOrder[];
+
+      return clone.filter(order => order.key !== orderData.key);
+    });
+  };
 
   return (
-    <div className="food-form__guest-row">
+    <Paper elevation={3} className="food-form__guest-row">
       <Autocomplete
         disablePortal
         id="guest"
         options={guests}
         className="food-form__guest-row-item"
+        onChange={handleAutocompleteChange}
         getOptionLabel={guest => guest.name}
         isOptionEqualToValue={(option, value) => option.id === value.id}
         noOptionsText=""
@@ -59,14 +113,11 @@ const FoodForm = ({
           <Select
             labelId="lunch-label"
             id="lunch"
-            value={foodOption.lunch}
+            name="lunch"
+            value={orderData.lunch}
             defaultValue="none"
-            onChange={e =>
-              setFoodOption(prev => ({
-                ...prev,
-                lunch: e.target.value as LunchOptions,
-              }))
-            }
+            disabled={orderData.fullDay === false}
+            onChange={handleChange}
             label="Lunch">
             <MenuItem value="none">
               <em>None</em>
@@ -82,6 +133,7 @@ const FoodForm = ({
               Vegatable and Smooked Tofu Kebab (Vegan)
             </MenuItem>
           </Select>
+          <FormHelperText>Full day guests only</FormHelperText>
         </FormControl>
 
         <FormControl variant="standard" className="food-form__guest-row-item">
@@ -89,15 +141,11 @@ const FoodForm = ({
           <Select
             labelId="hotdog-label"
             id="hotdog"
-            value={foodOption.hotdog}
+            name="hotdog"
+            value={orderData.hotdog}
             defaultValue="none"
-            onChange={e =>
-              setFoodOption(prev => ({
-                ...prev,
-                hotdog: e.target.value as HotdogOptions,
-              }))
-            }
-            label="Lunch">
+            onChange={handleChange}
+            label="Evening Meal">
             <MenuItem value="none">
               <em>None</em>
             </MenuItem>
@@ -119,10 +167,16 @@ const FoodForm = ({
         id="dietryRequirements"
         label="Dietry Requirements"
         variant="standard"
+        value={orderData.dietryRequirements}
+        name="dietryRequirements"
         multiline
-        onChange={() => {}}
+        onChange={handleChange}
       />
-    </div>
+
+      <Button color="error" onClick={removeOrder}>
+        Remove
+      </Button>
+    </Paper>
   );
 };
 export default FoodForm;

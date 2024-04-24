@@ -9,4 +9,5 @@ export const emptyFoodOption: FoodOptions = {
 export const emptyFoodOrder: FoodOrder = {
   ...emptyFoodOption,
   guestId: '',
+  key: 1,
 };

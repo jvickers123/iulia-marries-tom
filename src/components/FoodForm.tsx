@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import FoodFormGuest from './FoodFormGuest';
 import { emptyGuest, getPeopleInfoFromAPI } from '@/utilities/form-utils';
 import { Guests } from '@/types/admin-types';
@@ -8,13 +8,14 @@ import { emptyFoodOrder } from '@/utilities/food';
 const FoodForm = ({ openFoodInfo }: { openFoodInfo: () => void }) => {
   const [guests, setGuests] = useState<Guests[]>([]);
   const [formData, setFormData] = useState([emptyFoodOrder]);
+  const [currentOrderKey, setCurrentOrderKey] = useState(1);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   const addGuest = () => {
-    setFormData(prev => [...prev, emptyFoodOrder]);
+    setCurrentOrderKey(prev => prev + 1);
   };
 
   useEffect(() => {
@@ -27,14 +28,22 @@ const FoodForm = ({ openFoodInfo }: { openFoodInfo: () => void }) => {
     getPeopleInfo();
   }, []);
 
+  useEffect(() => {
+    if (currentOrderKey === 1) return;
+
+    setFormData(prev => [...prev, { ...emptyFoodOrder, key: currentOrderKey }]);
+  }, [currentOrderKey]);
+
   return (
     <>
       <form onSubmit={handleSubmit} className="food-form">
         <h2 className="booking-form__title modal-heading">Order Food</h2>
 
-        {formData.map(guest => (
+        {formData.map((order, index) => (
           <FoodFormGuest
-            key={guest.guestId}
+            orderData={formData[index]}
+            key={order.key}
+            orderIndex={index}
             guests={guests}
             setFormData={setFormData}
           />
