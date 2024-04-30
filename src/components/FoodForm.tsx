@@ -19,6 +19,8 @@ const FoodForm = ({
 }) => {
   const [guests, setGuests] = useState<Guests[]>([]);
   const [currentOrderKey, setCurrentOrderKey] = useState(1);
+  const orderFoodButtonIsDisabled =
+    formData.length === 0 || formData.some(order => !order.guestId);
 
   const addGuest = () => {
     setCurrentOrderKey(prev => prev + 1);
@@ -67,6 +69,7 @@ const FoodForm = ({
           variant="contained"
           className="booking-form__submit-btn"
           size="large"
+          disabled={orderFoodButtonIsDisabled}
           type="submit">
           Order food
         </Button>
