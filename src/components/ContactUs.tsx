@@ -16,7 +16,7 @@ const ContactUs = ({
       <p className="info__para info__para--green info__para--large">
         If you have any questions, please contact us at:
       </p>
-      <p className="info__para--large info__para info__para--dark-green success-rsvp__paragraph--helvetica-font">
+      <p className="info__para info__para--dark-green success-rsvp__paragraph--helvetica-font">
         {process.env.NEXT_PUBLIC_INFO_EMAIL}
       </p>
     </ModalContentContainer>
