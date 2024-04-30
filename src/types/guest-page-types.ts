@@ -63,6 +63,7 @@ export type FoodOptions = {
 
 export type FoodOrder = FoodOptions & {
   guestId: string;
+  guestName: string;
   fullDay?: boolean;
   key: number;
 };

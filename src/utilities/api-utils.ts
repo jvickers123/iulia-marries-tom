@@ -1,6 +1,11 @@
-import { RSVPData, RSVPGuest, TentData } from '@/types/guest-page-types';
+import {
+  FoodOrder,
+  RSVPData,
+  RSVPGuest,
+  TentData,
+} from '@/types/guest-page-types';
 import axios from 'axios';
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
 import { Guests, LoginData, TentForm } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
@@ -45,13 +50,13 @@ export const sendRSVP = async ({
   setRecievedPeople,
 }: {
   rsvpData: RSVPData;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setSuccess: React.Dispatch<SetStateAction<boolean>>;
-  setAttending: React.Dispatch<SetStateAction<boolean>>;
-  setMaybe: React.Dispatch<SetStateAction<boolean>>;
-  setRSVPData: React.Dispatch<SetStateAction<RSVPData>>;
-  setRecievedPeople: React.Dispatch<SetStateAction<RSVPGuest[]>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setSuccess: Dispatch<SetStateAction<boolean>>;
+  setAttending: Dispatch<SetStateAction<boolean>>;
+  setMaybe: Dispatch<SetStateAction<boolean>>;
+  setRSVPData: Dispatch<SetStateAction<RSVPData>>;
+  setRecievedPeople: Dispatch<SetStateAction<RSVPGuest[]>>;
 }) => {
   setLoading(true);
   setError(false);
@@ -162,9 +167,9 @@ export const bookAccomodation = async ({
   setError,
 }: {
   accomodationData: TentData;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setSuccess: React.Dispatch<SetStateAction<boolean>>;
-  setError: React.Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setSuccess: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
 }) => {
   setLoading(true);
 
@@ -196,10 +201,10 @@ export const login = async ({
   setIsLoggedIn,
 }: {
   formData: LoginData;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setFormData: React.Dispatch<SetStateAction<LoginData>>;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setIsLoggedIn: React.Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setFormData: Dispatch<SetStateAction<LoginData>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
 }) => {
   setLoading(true);
   try {
@@ -225,9 +230,9 @@ export const editGuest = async ({
   setShowSuccessToast,
 }: {
   body: Guests;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
 }) => {
   setLoading(true);
   try {
@@ -251,9 +256,9 @@ export const editAccomodation = async ({
   setShowSuccessToast,
 }: {
   body: TentForm;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
 }) => {
   setLoading(true);
   try {
@@ -285,10 +290,10 @@ export const addGuest = async ({
   setFormData,
 }: {
   body: Guests;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
-  setFormData: React.Dispatch<SetStateAction<Guests>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
+  setFormData: Dispatch<SetStateAction<Guests>>;
 }) => {
   setLoading(true);
   try {
@@ -323,10 +328,10 @@ export const updateOrAddGuest = async ({
 }: {
   data: Guests;
   edit?: boolean;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
-  setFormData: React.Dispatch<SetStateAction<Guests>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
+  setFormData: Dispatch<SetStateAction<Guests>>;
 }) => {
   if (edit) {
     editGuest({ body: data, setLoading, setError, setShowSuccessToast });
@@ -351,9 +356,9 @@ export const deleteGuest = async ({
   isAccomodation,
 }: {
   guestId: string;
-  setError: React.Dispatch<SetStateAction<boolean>>;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  setShowSuccessToast: React.Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
   isAccomodation: boolean;
 }) => {
   setLoading(true);
@@ -373,6 +378,46 @@ export const deleteGuest = async ({
     setShowSuccessToast(true);
   } catch (error) {
     console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
+const sendFoodOrder = async (order: FoodOrder) => {
+  const { guestId, hotdog, lunch, dietryRequirements } = order;
+
+  try {
+    return axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/guests/${guestId}`,
+      {
+        hotdog,
+        lunch,
+        dietryRequirements,
+      }
+    );
+  } catch (error: any) {
+    throw new Error(`${error} for guest ${guestId}`);
+  }
+};
+
+export const orderFood = async ({
+  formData,
+  setLoading,
+  setSuccess,
+  setError,
+}: {
+  formData: FoodOrder[];
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setSuccess: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const promises = formData.map(sendFoodOrder);
+    await Promise.all(promises);
+    setSuccess(true);
+  } catch (error: any) {
     setError(true);
   } finally {
     setLoading(false);

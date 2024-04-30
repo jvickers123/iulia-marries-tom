@@ -26,8 +26,8 @@ const Info = ({
       </p>
 
       <p className="info__para info__para--black info__para--margin-top">
-        Click on RSVP to let us know if you can make it. And you can book
-        accomodation and food on here too.
+        You can RSVP, book accomodation, and order food from the side menu. More
+        details will be posted on this site as they become available.
       </p>
     </ModalContentContainer>
   </Modal>

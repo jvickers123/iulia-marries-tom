@@ -62,6 +62,7 @@ const FoodForm = ({
       clone[orderIndex] = {
         ...clone[orderIndex],
         guestId: value?.id,
+        guestName: value?.name,
         fullDay: value?.fullDay,
       };
 

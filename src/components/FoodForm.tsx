@@ -1,18 +1,24 @@
-import { use, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import FoodFormGuest from './FoodFormGuest';
-import { emptyGuest, getPeopleInfoFromAPI } from '@/utilities/form-utils';
+import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
 import { Guests } from '@/types/admin-types';
 import { Button } from '@mui/material';
 import { emptyFoodOrder } from '@/utilities/food';
+import { FoodOrder } from '@/types/guest-page-types';
 
-const FoodForm = ({ openFoodInfo }: { openFoodInfo: () => void }) => {
+const FoodForm = ({
+  openFoodInfo,
+  formData,
+  setFormData,
+  handleSubmit,
+}: {
+  openFoodInfo: () => void;
+  formData: FoodOrder[];
+  setFormData: Dispatch<SetStateAction<FoodOrder[]>>;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}) => {
   const [guests, setGuests] = useState<Guests[]>([]);
-  const [formData, setFormData] = useState([emptyFoodOrder]);
   const [currentOrderKey, setCurrentOrderKey] = useState(1);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
 
   const addGuest = () => {
     setCurrentOrderKey(prev => prev + 1);
@@ -32,6 +38,7 @@ const FoodForm = ({ openFoodInfo }: { openFoodInfo: () => void }) => {
     if (currentOrderKey === 1) return;
 
     setFormData(prev => [...prev, { ...emptyFoodOrder, key: currentOrderKey }]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentOrderKey]);
 
   return (
