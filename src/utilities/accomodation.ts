@@ -74,11 +74,18 @@ export const calculateCosts = ({
   }
 };
 
-export const checkBookingDataIsValid = (accomodationData: TentData) => {
+export const checkBookingDataIsValid = ({
+  accomodationData,
+  sendEmailToFirstGuest,
+}: {
+  accomodationData: TentData;
+  sendEmailToFirstGuest: boolean;
+}) => {
   return Boolean(
     accomodationData.guests.length <=
       getMaxNoPeopleForTent(accomodationData.type) &&
       accomodationData.guests.length > 0 &&
-      accomodationData.email
+      ((accomodationData.encryptedEmail && sendEmailToFirstGuest) ||
+        (!sendEmailToFirstGuest && accomodationData.email))
   );
 };

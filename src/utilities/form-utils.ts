@@ -4,7 +4,7 @@ import { fetchGuests } from './api-utils';
 import { tentCosts } from './accomodation';
 
 export const initialAccomodationState: TentData = {
-  email: '',
+  encryptedEmail: '',
   guests: [],
   type: 'empty',
   notes: '',
@@ -52,6 +52,7 @@ export const getPeopleInfoFromAPI = async () => {
       name: guest.name,
       fullDay: guest.fullDay,
       email: guest.email,
+      encryptedEmail: guest.encryptedEmail,
     }));
 
     return mappedData;
@@ -86,4 +87,4 @@ export const getTotalFood = (guests: Guests[]) => {
   );
 
   return food as FoodTotals;
-}
+};

@@ -20,13 +20,20 @@ const BookAccomodationModal = ({
   const [accomodationData, setAccomodationData] = useState(
     initialAccomodationState
   );
+  const [sendEmailToFirstGuest, setSendEmailToFirstGuest] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    bookAccomodation({ accomodationData, setLoading, setSuccess, setError });
+    bookAccomodation({
+      accomodationData,
+      setLoading,
+      setSuccess,
+      setError,
+      sendEmailToFirstGuest,
+    });
   };
 
   return (
@@ -47,6 +54,8 @@ const BookAccomodationModal = ({
             accomodationData={accomodationData}
             handleSubmit={handleSubmit}
             openAccomodationInfo={openAccomodationInfo}
+            sendEmailToFirstGuest={sendEmailToFirstGuest}
+            setSendEmailToFirstGuest={setSendEmailToFirstGuest}
           />
         )}
       </ModalContentContainer>

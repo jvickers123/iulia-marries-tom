@@ -4,6 +4,7 @@ export type Guests = {
   name: string;
   id: string;
   email?: string;
+  encryptedEmail?: string;
   slug?: string;
   accomodation?: string;
   accomodationTents?: TentForm;

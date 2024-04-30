@@ -91,7 +91,13 @@ export const sendRSVP = async ({
   }
 };
 
-export const sendPaymentEmail = async (booking: TentData) => {
+export const sendPaymentEmail = async ({
+  booking,
+  sendEmailToFirstGuest,
+}: {
+  booking: TentData;
+  sendEmailToFirstGuest: boolean;
+}) => {
   const message = `Hi,
 
 Thanks for booking accomodation for Thomas and Iulia's wedding!
@@ -112,11 +118,13 @@ Thanks and looking forward to seeing you there,
 
 Thomas and Iulia xxx
   `;
+
+  const body = sendEmailToFirstGuest
+    ? { encryptedEmail: booking.encryptedEmail, message }
+    : { email: booking.email, message };
+
   try {
-    await axios.post(`${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`, {
-      email: booking.email,
-      message,
-    });
+    await axios.post(`${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`, body);
   } catch (error) {
     console.log(error);
   }
@@ -165,11 +173,13 @@ export const bookAccomodation = async ({
   setLoading,
   setSuccess,
   setError,
+  sendEmailToFirstGuest,
 }: {
   accomodationData: TentData;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setSuccess: Dispatch<SetStateAction<boolean>>;
   setError: Dispatch<SetStateAction<boolean>>;
+  sendEmailToFirstGuest: boolean;
 }) => {
   setLoading(true);
 
@@ -184,7 +194,7 @@ export const bookAccomodation = async ({
     );
 
     setSuccess(true);
-    sendPaymentEmail(accomodationData);
+    sendPaymentEmail({ booking: accomodationData, sendEmailToFirstGuest });
   } catch (error) {
     console.error(error);
     setError(true);

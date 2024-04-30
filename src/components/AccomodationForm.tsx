@@ -14,7 +14,7 @@ import {
   getMaxNoPeopleForTent,
 } from '@/utilities/accomodation';
 import AutoCompleteMultiSelect from './AutoCompleteMultiSelect';
-import { SyntheticEvent, use, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { getGuestNamesOneString } from '@/utilities/data';
 
 const AccomodationForm = ({
@@ -22,14 +22,17 @@ const AccomodationForm = ({
   handleSubmit,
   accomodationData,
   openAccomodationInfo,
+  sendEmailToFirstGuest,
+  setSendEmailToFirstGuest,
 }: {
   setAccomodationData: React.Dispatch<React.SetStateAction<TentData>>;
   accomodationData: TentData;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   openAccomodationInfo: () => void;
+  sendEmailToFirstGuest: boolean;
+  setSendEmailToFirstGuest: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [totalCost, setTotalCost] = useState(0);
-  const [sendEmailToFirstGuest, setSendEmailToFirstGuest] = useState(true);
   const [showNotesAboutExtraBeds, setShowNotesAboutExtraBeds] = useState(false);
   const [isValidBookingData, setIsValidBookingData] = useState(false);
 
@@ -85,28 +88,31 @@ const AccomodationForm = ({
     if (sendEmailToFirstGuest && accomodationData.guests.length > 0) {
       setAccomodationData({
         ...accomodationData,
-        email: accomodationData.guests[0].email || '',
+        encryptedEmail: accomodationData.guests[0].encryptedEmail || '',
       });
     } else {
       setAccomodationData({
         ...accomodationData,
-        email: '',
+        encryptedEmail: '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accomodationData.guests, sendEmailToFirstGuest]);
 
   useEffect(() => {
-    const isValid = checkBookingDataIsValid(accomodationData);
+    const isValid = checkBookingDataIsValid({
+      accomodationData,
+      sendEmailToFirstGuest,
+    });
 
     setIsValidBookingData(isValid);
-  }, [accomodationData]);
+  }, [accomodationData, sendEmailToFirstGuest]);
 
   useEffect(() => {
     setAccomodationData({ ...accomodationData, price: totalCost });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalCost])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalCost]);
 
   return (
     <>

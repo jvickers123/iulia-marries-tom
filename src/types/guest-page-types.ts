@@ -17,6 +17,7 @@ export type RSVPGuest = {
   id: string;
   name: string;
   fullDay?: boolean;
+  encryptedEmail?: string;
   email?: string;
 };
 
@@ -46,7 +47,8 @@ export type TentCosts = {
 };
 
 export type TentData = {
-  email: string;
+  encryptedEmail?: string;
+  email?: string;
   type: 'empty' | 'party' | 'luxury';
   guests: RSVPGuest[];
   id?: string;
