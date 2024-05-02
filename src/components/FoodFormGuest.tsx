@@ -131,7 +131,7 @@ const FoodForm = ({
               Vegetable and Halloumi Kebab (Vegetarian)
             </MenuItem>
             <MenuItem value="vegan">
-              Vegatable and Smooked Tofu Kebab (Vegan)
+              Vegatable and Smoked Tofu Kebab (Vegan)
             </MenuItem>
           </Select>
           <FormHelperText>Full day guests only</FormHelperText>

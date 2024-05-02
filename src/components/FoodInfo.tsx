@@ -47,7 +47,7 @@ const FoodInfo = ({
         </p>
 
         <p className="info__para info__para--purple">
-          Vegatable and Smooked Tofu Kebab (Vegan)
+          Vegatable and Smoked Tofu Kebab (Vegan)
         </p>
 
         <p className="info__para info__para--black info__para--margin-top">
