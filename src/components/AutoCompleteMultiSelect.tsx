@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
 import { RSVPGuest } from '@/types/guest-page-types';
 import { getPeopleInfoFromAPI } from '@/utilities/form-utils';
+import Chip from '@mui/material/Chip';
 
 const AutoCompleteMultiSelect = ({
   onChange,
@@ -34,7 +35,6 @@ const AutoCompleteMultiSelect = ({
       id="people"
       value={value}
       options={guests}
-      getOptionLabel={guest => guest.name}
       filterSelectedOptions
       isOptionEqualToValue={(option, value) => option.id === value.id}
       noOptionsText=""
@@ -48,7 +48,21 @@ const AutoCompleteMultiSelect = ({
         );
         return filtered;
       }}
-      getOptionKey={guest => guest.id}
+      getOptionLabel={guest => guest.name}
+      renderOption={(props, guest) => (
+        <li {...props} key={guest.id}>
+          {guest.name}
+        </li>
+      )}
+      renderTags={(tagValue, getTagProps) => {
+        return tagValue.map((option, index) => (
+          <Chip
+            {...getTagProps({ index })}
+            key={option.id}
+            label={option.name}
+          />
+        ));
+      }}
       renderInput={params => (
         <TextField
           {...params}
