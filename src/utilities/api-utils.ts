@@ -158,6 +158,7 @@ Thomas and Iulia xxx
     await axios.post(`${process.env.NEXT_PUBLIC_SEND_EMAIL_URL}`, {
       email,
       message,
+      gift: true,
     });
     setSuccess(true);
   } catch (error) {
