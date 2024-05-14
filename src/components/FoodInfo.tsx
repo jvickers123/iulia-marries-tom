@@ -47,7 +47,7 @@ const FoodInfo = ({
         </p>
 
         <p className="info__para info__para--purple">
-          Vegatable and Smoked Tofu Kebab (Vegan)
+          Vegetable and Smoked Tofu Kebab (Vegan)
         </p>
 
         <p className="info__para info__para--black info__para--margin-top">
@@ -59,7 +59,7 @@ const FoodInfo = ({
         </p>
 
         <p className="info__para info__para--dark-green">
-          If you would like a posh hotdog in the evening please select one of
+          If you would like a posh hotdog in the evening, please select one of
           the options below:
         </p>
 
@@ -84,7 +84,7 @@ const FoodInfo = ({
         </p>
 
         <p className="info__para info__para--green info__para--margin-top">
-          Order below and let us know if you have any dietry requirements.
+          Order below and let us know if you have any dietary requirements.
         </p>
         <p className="info__para info__para--green">
           If you change your mind, just order again and we will take the latest

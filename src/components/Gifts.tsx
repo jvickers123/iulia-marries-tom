@@ -24,7 +24,7 @@ const Gifts = ({
 
       <p className="info__para info__para--dark-green">
         However, we are planning to go on a honeymoon and renovate our house in
-        the future, so if your gift was to contribute to either of these we
+        the future, so if your gift was to contribute to either of these, we
         would be very grateful
       </p>
 

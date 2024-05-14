@@ -131,7 +131,7 @@ const FoodForm = ({
               Vegetable and Halloumi Kebab (Vegetarian)
             </MenuItem>
             <MenuItem value="vegan">
-              Vegatable and Smoked Tofu Kebab (Vegan)
+              Vegetable and Smoked Tofu Kebab (Vegan)
             </MenuItem>
           </Select>
           <FormHelperText>Full day guests only</FormHelperText>
@@ -166,7 +166,7 @@ const FoodForm = ({
       <TextField
         className="food-form__guest-row-item"
         id="dietryRequirements"
-        label="Dietry Requirements"
+        label="Dietary Requirements"
         variant="standard"
         value={orderData.dietryRequirements}
         name="dietryRequirements"
