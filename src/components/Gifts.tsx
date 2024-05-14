@@ -15,11 +15,11 @@ const Gifts = ({
       <h2 className="info__heading">Gifts</h2>
 
       <p className="info__para info__para--green">
-        For those of you who are thinking about a wedding gift:
+        For those of you who are thinking about a wedding gift,
       </p>
       <p className="info__para info__para--purple">
-        Because we have lived together some time, our houe is already pretty
-        kitted out
+        because we have lived together for some time, our house is already
+        pretty kitted out
       </p>
 
       <p className="info__para info__para--dark-green">
@@ -29,7 +29,7 @@ const Gifts = ({
       </p>
 
       <p className="info__para info__para--black info__para--margin-top">
-        Please contact us for bank details or provide email below and we can
+        Please contact us for bank details or provide an email below and we can
         send them over
       </p>
 
