@@ -25,7 +25,7 @@ const SuccessFoodOrder = ({
   };
   return (
     <div className="success-rsvp">
-      <h2 className="success-rsvp__heading">Your order has been revieved</h2>
+      <h2 className="success-rsvp__heading">Your order has been received</h2>
 
       <p className="success-rsvp__paragraph">You have ordered:</p>
       <ul className="success-rsvp__list">
