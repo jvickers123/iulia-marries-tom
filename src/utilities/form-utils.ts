@@ -42,6 +42,11 @@ export const emptyAccomodation: TentForm = {
   price: 0,
 };
 
+export const emptyNotice: Notice = {
+  title: '',
+  message: '',
+};
+
 export const getPeopleInfoFromAPI = async () => {
   try {
     const data = await fetchGuests();

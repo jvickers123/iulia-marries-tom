@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
-import { Guests, LoginData, TentForm } from '@/types/admin-types';
+import { Guests, LoginData, Notice, TentForm } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
 
 export const fetchAccomodationAndGuests = async () => {
@@ -260,6 +260,72 @@ export const editGuest = async ({
   }
 };
 
+export const editNotice = async ({
+  body,
+  setLoading,
+  setError,
+  setShowSuccessToast,
+}: {
+  body: Notice;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const token = getTokenFromLocal();
+
+    await axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/notices/${body.id}`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setShowSuccessToast(true);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const addNotice = async ({
+  body,
+  setLoading,
+  setError,
+  setShowSuccessToast,
+}: {
+  body: Notice;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+  setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const token = getTokenFromLocal();
+
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/notices`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setShowSuccessToast(true);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
+
 export const editAccomodation = async ({
   body,
   setLoading,
@@ -359,18 +425,20 @@ export const updateOrAddGuest = async ({
   });
 };
 
-export const deleteGuest = async ({
-  guestId,
+export const deleteItem = async ({
+  itemId,
   setError,
   setLoading,
   setShowSuccessToast,
   isAccomodation,
+  isNotice,
 }: {
-  guestId: string;
+  itemId: string;
   setError: Dispatch<SetStateAction<boolean>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setShowSuccessToast: Dispatch<SetStateAction<boolean>>;
   isAccomodation: boolean;
+  isNotice: boolean;
 }) => {
   setLoading(true);
   try {
@@ -378,8 +446,8 @@ export const deleteGuest = async ({
 
     await axios.delete(
       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/${
-        isAccomodation ? 'accomodation' : 'guests'
-      }/${guestId}`,
+        isAccomodation ? 'accomodation' : isNotice ? 'notices' : 'guests'
+      }/${itemId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

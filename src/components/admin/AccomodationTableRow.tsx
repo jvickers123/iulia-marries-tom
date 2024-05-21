@@ -28,7 +28,7 @@ const AdminTableRow = ({ tent }: { tent: Tent }) => {
           <EditButton setEditing={setEditing} />
         </TableCell>
         <TableCell>
-          <DeleteButton guestId={id} guestName={name} isAccomodation />
+          <DeleteButton itemId={id} guestName={name} isAccomodation />
         </TableCell>
       </TableRow>
       {editing && (

@@ -3,13 +3,15 @@ import { useState } from 'react';
 import DeleteModal from './DeleteModal';
 
 const DeleteButton = ({
-  guestId,
+  itemId,
   guestName,
   isAccomodation = false,
+  isNotice = false,
 }: {
-  guestId: string;
+  itemId: string;
   guestName: string;
   isAccomodation?: boolean;
+  isNotice?: boolean;
 }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -24,11 +26,12 @@ const DeleteButton = ({
       </Button>
       {showDeleteModal && (
         <DeleteModal
-          guestId={guestId}
+          itemId={itemId}
           guestName={guestName}
           showDeleteModal={showDeleteModal}
           setShowDeleteModal={setShowDeleteModal}
           isAccomodation={isAccomodation}
+          isNotice={isNotice}
         />
       )}
     </>

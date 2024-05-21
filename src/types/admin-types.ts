@@ -32,6 +32,16 @@ export type Tent = TentBase & {
   guests: Guests[];
 };
 
+export type Notice = {
+  title: string;
+  message: string;
+  user?: string;
+  id?: string;
+  createdAt?: string;
+  slug?: string;
+  updatedAt?: string;
+};
+
 export type TentForm = TentBase & {
   guests: string[];
 };
@@ -45,4 +55,4 @@ export type FoodTotals = {
   fish: number;
   halloumi: number;
   tofu: number;
-}
+};

@@ -1,23 +1,25 @@
 import Modal from '@mui/material/Modal';
 import ModalContentContainer from '../ModalContentContainer';
 import Button from '@mui/material/Button';
-import { deleteGuest } from '@/utilities/api-utils';
+import { deleteItem } from '@/utilities/api-utils';
 import { useState } from 'react';
 import LoadingSpinner from '../LoadingSpinner';
 import SuccessToast from '../SuccessToast';
 
 const DeleteModal = ({
-  guestId,
+  itemId,
   setShowDeleteModal,
   showDeleteModal,
   guestName,
   isAccomodation,
+  isNotice,
 }: {
-  guestId: string;
+  itemId: string;
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
   showDeleteModal: boolean;
   guestName: string;
   isAccomodation: boolean;
+  isNotice: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -25,12 +27,13 @@ const DeleteModal = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    deleteGuest({
-      guestId,
+    deleteItem({
+      itemId,
       setError,
       setLoading,
       setShowSuccessToast,
       isAccomodation,
+      isNotice,
     });
   };
   return (

@@ -1,14 +1,16 @@
-import { Guests, Tent } from '@/types/admin-types';
+import { Guests, Notice, Tent } from '@/types/admin-types';
 import { fetchAccomodationAndGuests } from './api-utils';
 
 export const getData = async ({
   setLoading,
   setGuests,
   setTents,
+  setNotices,
 }: {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setTents: React.Dispatch<React.SetStateAction<Tent[]>>;
   setGuests: React.Dispatch<React.SetStateAction<Guests[]>>;
+  setNotices: React.Dispatch<React.SetStateAction<Notice[]>>;
 }) => {
   setLoading(true);
   const data = await fetchAccomodationAndGuests();
@@ -18,6 +20,7 @@ export const getData = async ({
 
   setGuests(data.guests);
   setTents(data.accomodation);
+  setNotices(data.notices);
 };
 
 export const getGuestNamesOneString = (guests?: Guests[]) => {
