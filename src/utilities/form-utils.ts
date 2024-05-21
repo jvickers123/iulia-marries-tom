@@ -1,4 +1,4 @@
-import { FoodTotals, Guests, TentForm } from '@/types/admin-types';
+import { FoodTotals, Guests, Notice, TentForm } from '@/types/admin-types';
 import { RSVPData, RSVPGuest, TentData } from '@/types/guest-page-types';
 import { fetchGuests } from './api-utils';
 import { tentCosts } from './accomodation';
