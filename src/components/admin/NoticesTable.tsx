@@ -32,7 +32,7 @@ const NoticesTable = ({ notices }: { notices: Notice[] }) => {
       <h2>Notices</h2>
       <Button
         variant="contained"
-        className="add-guest__button"
+        className="admin-table__button"
         onClick={() => setShowAddNoticeForm(true)}>
         Add Notice
       </Button>

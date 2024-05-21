@@ -56,12 +56,12 @@ const NoticeForm = ({ notice }: { notice?: Notice }) => {
   return (
     <>
       <h2 className="edit-form__heading">Edit notice</h2>
-      <form onSubmit={handleSubmit} className="edit-form">
+      <form onSubmit={handleSubmit} className="edit-form edit-form--wide">
         <div className="edit-form__flex-container">
           <TextField
             onChange={handleChange}
             value={formData.title}
-            className="edit-form__input"
+            className="edit-form__input edit-form__input--wide"
             id="title"
             label="Title"
             type="text"
@@ -69,7 +69,7 @@ const NoticeForm = ({ notice }: { notice?: Notice }) => {
           <TextField
             onChange={handleChange}
             value={formData.message}
-            className="edit-form__input"
+            className="edit-form__input edit-form__input--wide"
             id="message"
             label="Message"
             multiline
