@@ -49,7 +49,7 @@ const AdminTableRow = ({ guest }: { guest: Guests }) => {
           <EditButton setEditing={setEditing} />
         </TableCell>
         <TableCell>
-          <DeleteButton guestId={id} guestName={name} />
+          <DeleteButton itemId={id} guestName={name} />
         </TableCell>
       </TableRow>
       {editing && (
