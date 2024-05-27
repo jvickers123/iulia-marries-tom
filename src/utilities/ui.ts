@@ -10,4 +10,5 @@ export const emptyShowPanels: ShowPanels = {
   orderFood: false,
   contact: false,
   timings: false,
+  notices: false,
 };

@@ -27,3 +27,8 @@ export const getGuestNamesOneString = (guests?: Guests[]) => {
   if (!guests) return '';
   return guests.reduce((acc, guest) => `${acc && `${acc}, `}${guest.name}`, '');
 };
+
+export const sortNoticesByTime = (notices: Notice[]) =>
+  notices.sort((a, b) => {
+    return new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime();
+  });

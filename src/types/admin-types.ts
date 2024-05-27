@@ -32,10 +32,16 @@ export type Tent = TentBase & {
   guests: Guests[];
 };
 
+export type NoticeUser = {
+  name: string;
+  id: string;
+  _id: string;
+};
+
 export type Notice = {
   title: string;
   message: string;
-  user?: string;
+  user?: string | NoticeUser;
   id?: string;
   createdAt?: string;
   slug?: string;

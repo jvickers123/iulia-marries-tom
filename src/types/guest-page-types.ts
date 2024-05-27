@@ -31,6 +31,7 @@ export type ShowPanels = {
   orderFood: boolean;
   contact: boolean;
   timings: boolean;
+  notices: boolean;
 };
 
 export type TentPrices = {

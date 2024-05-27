@@ -9,6 +9,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { emptyGuest, initialRSVPState } from './form-utils';
 import { Guests, LoginData, Notice, TentForm } from '@/types/admin-types';
 import { getTokenFromLocal } from './auth';
+import { sortNoticesByTime } from './data';
 
 export const fetchAccomodationAndGuests = async () => {
   try {
@@ -36,6 +37,32 @@ export const fetchGuests = async () => {
     return data.data as Guests[];
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const fetchNotices = async ({
+  setNotices,
+  setLoading,
+  setError,
+}: {
+  setNotices: Dispatch<SetStateAction<Notice[]>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setError: Dispatch<SetStateAction<boolean>>;
+}) => {
+  setLoading(true);
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/notices`
+    );
+
+    const reversedData = sortNoticesByTime(data.data);
+
+    setNotices(reversedData);
+  } catch (error) {
+    console.error(error);
+    setError(true);
+  } finally {
+    setLoading(false);
   }
 };
 

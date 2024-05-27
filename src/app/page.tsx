@@ -18,6 +18,7 @@ import FoodInfo from '@/components/FoodInfo';
 import ContactUs from '@/components/ContactUs';
 import Timings from '@/components/Timings';
 import OrderFoodModal from '@/components/OrderFoodModal';
+import Notices from '@/components/Notices';
 
 export default function Home() {
   const [showPanels, setShowPanels] = useState(emptyShowPanels);
@@ -121,6 +122,15 @@ export default function Home() {
               }))
             }
             showContactUs={showPanels.contact}
+          />
+          <Notices
+            closeModal={() =>
+              setShowPanels(prev => ({
+                ...prev,
+                notices: false,
+              }))
+            }
+            showNotices={showPanels.notices}
           />
         </main>
       </ThemeProvider>

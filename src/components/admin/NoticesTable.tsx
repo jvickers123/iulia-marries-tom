@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import EditModal from './EditModal';
 import Button from '@mui/material/Button';
 import AddNotice from './AddNotice';
+import { sortNoticesByTime } from '@/utilities/data';
 
 const NoticesTable = ({ notices }: { notices: Notice[] }) => {
   const [showEditing, setShowEditing] = useState(false);
@@ -19,11 +20,7 @@ const NoticesTable = ({ notices }: { notices: Notice[] }) => {
   const [sortedNotices, setSortedNotices] = useState<Notice[]>([]);
 
   useEffect(() => {
-    const sorted = notices.sort((a, b) => {
-      return (
-        new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime()
-      );
-    });
+    const sorted = sortNoticesByTime(notices);
 
     setSortedNotices(sorted);
   }, [notices]);
